@@ -57,15 +57,14 @@ namespace SecondDesktopAppManagerDll
         {
             if(appManager == null)
             {
-                appManager = Init();
+                Init();
             }
 
             return appManager;
         }
 
-        private static AppManager Init()
+        private static void Init()
         {
-            AppManager manager = null;
             ConfigPath = ConfigManager.GetInstance().SystemConfigDirectory + "app.config";
             if (!File.Exists(ConfigPath))
             {
@@ -79,13 +78,47 @@ namespace SecondDesktopAppManagerDll
             json = MD5.Decrypt(json);
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
             DataContractJsonSerializer deseralizer = new DataContractJsonSerializer(typeof(AppManager));
-            manager = (AppManager)deseralizer.ReadObject(ms);
-            return manager;
+			appManager = (AppManager)deseralizer.ReadObject(ms);
+
+			appManager.InitAppStore();
         }
 
-        public string GetConfig(string AppUID)
+		private void InitAppStore()
+		{
+			if(!ExistsApp("SecondDesktopAppStore"))
+			{
+				string path = ConfigManager.GetInstance().ApplicationDirectory + "SecondDesktopAppStore";
+				AddApp(path);
+			}
+		}
+
+		public static void CopyDirectory(string pOldPath, string pNewPath)
+		{
+			try
+			{
+				if (pNewPath[pNewPath.Length - 1] != Path.DirectorySeparatorChar)
+					pNewPath += Path.DirectorySeparatorChar;
+				if (!Directory.Exists(pNewPath))
+					Directory.CreateDirectory(pNewPath);
+				string[] fileList = Directory.GetFileSystemEntries(pOldPath);
+				foreach (string file in fileList)
+				{
+					if (Directory.Exists(file))
+						CopyDirectory(file, pNewPath + Path.GetFileName(file));
+					// 否则直接Copy文件
+					else
+						File.Copy(file, pNewPath + Path.GetFileName(file), true);
+				}
+			}
+			catch
+			{
+				Console.WriteLine("无法复制!");
+			}
+		}
+
+		public string GetConfig(string AppUID)
         {
-            string path = ConfigManager.GetInstance().SystemConfigDirectory + AppUID + "\\";
+            string path = ConfigManager.GetInstance().ApplicationConfigDirectory + AppUID + "\\";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -106,7 +139,42 @@ namespace SecondDesktopAppManagerDll
             SelectAppNotify(AppUID);
         }
 
-        public void AddApp(AppItem newItem)
+		public bool ExistsApp(string pAppUID)
+		{
+			foreach (AppItem item in AppItemList)
+			{
+				if (item.AppUID == pAppUID)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public void AddApp(string pPath)
+		{
+			AppItem item = new AppItem();
+
+			string appUID = pPath.Substring(pPath.LastIndexOf("\\") + 1);
+			item.AppUID = appUID;
+			string newPath = ConfigManager.GetInstance().ApplicationAppsDirectory + appUID;
+			CopyDirectory(pPath, newPath);
+			string[] fileList = Directory.GetFileSystemEntries(newPath);
+			foreach (string file in fileList)
+			{
+				if (file.Contains(".png"))
+				{
+					item.Icon = file;
+					item.Name = file.Substring(file.LastIndexOf("\\") + 1).Replace(".png", "");
+					break;
+				}
+			}
+			item.Config = GetConfig(appUID);
+			item.Status = AppStatus.System;
+			AddApp(item);
+		}
+
+		public void AddApp(AppItem newItem)
         {
             for(int page = 0; page <= SDSystem.AppMaxPageCount; page++)
             {
@@ -141,7 +209,7 @@ namespace SecondDesktopAppManagerDll
         {
             for(int i = 0; i < AppItemList.Count; i++)
             {
-                if(AppItemList.ElementAt(i).AppID == item.AppID)
+                if(AppItemList.ElementAt(i).AppUID == item.AppUID)
                 {
                     AppItemList.RemoveAt(i);
                     AppItemList.Add(item);
@@ -200,7 +268,7 @@ namespace SecondDesktopAppManagerDll
 
             DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(AppManager));
             MemoryStream memoryStream = new MemoryStream();
-            js.WriteObject(memoryStream, AppManager.GetInstance());
+            js.WriteObject(memoryStream, appManager);
             memoryStream.Position = 0;
             StreamReader streamReader = new StreamReader(memoryStream, Encoding.UTF8);
             string json = streamReader.ReadToEnd();
@@ -209,7 +277,10 @@ namespace SecondDesktopAppManagerDll
             json = MD5.Encrypt(json);
             File.WriteAllText(ConfigPath, json);
 
-            Update();
+			if(Update != null)
+			{
+				Update();
+			}
         }
     }
 }

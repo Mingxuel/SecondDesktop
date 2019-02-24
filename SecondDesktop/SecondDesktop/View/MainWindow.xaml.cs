@@ -1,5 +1,6 @@
 ﻿using SecondDesktopAppManagerDll;
 using SecondDesktopDesktopManagerDll;
+using SecondDesktopDll;
 using SecondDesktopMessagerDll;
 using System;
 using System.Collections.Generic;
@@ -146,7 +147,7 @@ namespace SecondDesktop
         private void SelectApp(string AppUID)
         {
             ((VMMain)this.DataContext).AppMainWindowVisibility = Visibility.Visible;
-            Assembly assembly = Assembly.LoadFrom(AppUID + ".dll");
+            Assembly assembly = Assembly.LoadFrom(ConfigManager.GetInstance().ApplicationAppsDirectory + AppUID + "\\" + AppUID + ".dll");
             Type factory = assembly.GetType(AppUID + ".Factory");
             MethodInfo method = factory.GetMethod("CreateWindow");
             Object obj = Activator.CreateInstance(factory);

@@ -57,5 +57,21 @@ namespace SecondDesktopDll
                 return ConfigPath + "\\AppConfig\\";
             }
         }
-    }
+
+		public string ApplicationAppsDirectory
+		{
+			get
+			{
+				return ConfigPath + "\\Apps\\";
+			}
+		}
+
+		public string ApplicationDirectory
+		{
+			get
+			{
+				return System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+			}
+		}
+	}
 }

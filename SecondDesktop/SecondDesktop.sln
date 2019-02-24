@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondDesktopHotkeyManagerD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondDesktopMessagerDll", "SecondDesktopMessagerDll\SecondDesktopMessagerDll.csproj", "{95800C3A-D7C2-4BFF-B89F-31F0A5CC302B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondDesktopAppStore", "SecondDesktopAppStore\SecondDesktopAppStore.csproj", "{088B85AA-D42C-4EE9-AB60-9E082B8E282C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{95800C3A-D7C2-4BFF-B89F-31F0A5CC302B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95800C3A-D7C2-4BFF-B89F-31F0A5CC302B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95800C3A-D7C2-4BFF-B89F-31F0A5CC302B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088B85AA-D42C-4EE9-AB60-9E082B8E282C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088B85AA-D42C-4EE9-AB60-9E082B8E282C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088B85AA-D42C-4EE9-AB60-9E082B8E282C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088B85AA-D42C-4EE9-AB60-9E082B8E282C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

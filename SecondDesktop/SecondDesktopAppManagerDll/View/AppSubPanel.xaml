@@ -55,8 +55,11 @@
                                 <ColumnDefinition Width="36"/>
                                 <ColumnDefinition Width="6"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="0" Grid.Column="1" Content="{Binding Name, Mode=TwoWay}" Background="{x:Null}" BorderBrush="White" Foreground="White">
-                                <i:Interaction.Triggers>
+                            <Button Grid.Row="0" Grid.Column="1">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="{Binding Icon, Mode=TwoWay}" Stretch="None"/>
+                                </Button.Background>
+                                    <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
                                     </i:EventTrigger>

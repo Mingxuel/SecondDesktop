@@ -77,11 +77,11 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3"/>
-                                    <ColumnDefinition Width="12"/>
-                                    <ColumnDefinition Width="3"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="14"/>
+                                    <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.Row="0" Grid.Column="1" BorderBrush="#3D3D3D" BorderThickness="1" Width="12" Height="25" Background="#3D3D3D">
+                                <Border Grid.Row="0" Grid.Column="1" BorderBrush="#3D3D3D" BorderThickness="1" Width="14" Height="25" Background="#3D3D3D">
                                     <Image Source="{Binding Image, Mode=TwoWay}" Stretch="None"/>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PreviewMouseDown">

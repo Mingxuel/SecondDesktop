@@ -21,7 +21,5 @@ namespace SecondDesktopAppManagerDll
         public int RowID { get; set; }
         [DataMember]
         public int ColumnID { get; set; }
-        [DataMember]
-        public string AppID { get; set; }
     }
 }

@@ -309,7 +309,10 @@ namespace SecondDesktop
                 SelectPageNotify(CurrentPage);
             }
 
-            DesktopTitle = DesktopManager.GetInstance().PageList[CurrentPage];
+			if(DesktopManager.GetInstance().PageList.Count() > 0)
+			{
+				DesktopTitle = DesktopManager.GetInstance().PageList[CurrentPage];
+			}
         }
     }
 }

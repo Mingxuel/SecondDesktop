@@ -64,7 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Manager\ConfigManager.cs" />
     <Compile Include="Manager\HotKeyManager.cs" />
     <Compile Include="Class\SubDesktop.cs" />
     <Compile Include="Class\SubDesktopItem.cs" />
