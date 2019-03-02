@@ -1,4 +1,5 @@
-﻿using SecondDesktopDesktopManagerDll;
+﻿using SecondDesktopAppManagerDll;
+using SecondDesktopDesktopManagerDll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,17 @@ namespace SecondDesktop
             CloseNotify += CloseWindow;
         }
 
-        public void Add(UserControl uc)
+        public void Add(UserControl pUserControl, string pAppUID)
         {
-            ContentArea.Children.Add(uc);
+            ContentArea.Children.Add(pUserControl);
+            foreach(var item in AppManager.GetInstance().AppItemList)
+            {
+                if(item.AppUID == pAppUID)
+                {
+                    ((VMAppPanelFrame)this.DataContext).Title = item.Name;
+                    break;
+                }
+            }
         }
 
         private void BtClose_Click(object sender, RoutedEventArgs e)

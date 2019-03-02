@@ -8,7 +8,6 @@ namespace SecondDesktop
 {
     class MAppPanelFrame
     {
-        public double Width;
-        public double Height;
+        public string Title;
     }
 }

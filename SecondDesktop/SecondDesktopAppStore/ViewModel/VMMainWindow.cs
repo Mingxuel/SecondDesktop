@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SecondDesktopAppStore
 {
-	class VMMainWindow
+    class VMMainWindow
 	{
-	}
+        public MMainWindow Model { get; set; }
+        public VMMainWindow()
+        {
+			Model = new MMainWindow();
+        }
+    }
 }

@@ -8,5 +8,6 @@ namespace SecondDesktopAppStore
 {
 	class MMainWindow
 	{
-	}
+
+    }
 }

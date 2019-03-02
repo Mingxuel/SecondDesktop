@@ -155,7 +155,7 @@ namespace SecondDesktop
             UserControl uc = (UserControl)method.Invoke(obj, parameters);
             AppPanelFrame border = new AppPanelFrame();
             border.CloseNotify += CloseApp;
-            border.Add(uc);
+            border.Add(uc, AppUID);
             wpAppPanel.Children.Clear();
             wpAppPanel.Children.Add(border);
         }

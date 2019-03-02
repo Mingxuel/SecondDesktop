@@ -5,26 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecondDesktop"
              mc:Ignorable="d" 
-             VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="White" Margin="0,0,0,5">
-    <Grid VerticalAlignment="Stretch">
-        <WrapPanel Width="344" VerticalAlignment="Stretch" Orientation="Vertical">
-            <Grid Name="TitleBar" VerticalAlignment="Center" Height="12" Width="344" HorizontalAlignment="Stretch">
+             VerticalAlignment="Top" BorderThickness="2" BorderBrush="Blue" Margin="0,0,0,5" Width="344">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" VerticalAlignment="Stretch" Orientation="Vertical" Width="344" Background="#2D2D2D">
+            <Grid Name="TitleBar" VerticalAlignment="Center" Height="20" Width="344" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="8"/>
                     <ColumnDefinition Width="4"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btClose" Grid.Column="1" Content="X" Width="8" Height="8" Foreground="White" Click="BtClose_Click"/>
+                <TextBlock Grid.Column="0" Text="{Binding Title, Mode=TwoWay}" Foreground="White"/>
+                <Button Name="btClose" Grid.Column="2" Content="X" Width="8" Height="8" Foreground="White" Click="BtClose_Click"/>
             </Grid>
-            <WrapPanel Name="ContentArea"  VerticalAlignment="Stretch"/>
         </WrapPanel>
-        <Grid Name="StatusBar" VerticalAlignment="Bottom" Height="12" Width="Auto" HorizontalAlignment="Stretch">
+        <WrapPanel Grid.Row="1" Name="ContentArea"/>
+        <!--<Grid Grid.Row="2" Name="StatusBar" VerticalAlignment="Bottom" Height="12" Width="Auto" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="4"/>
             </Grid.ColumnDefinitions>
-            <!--<Button Grid.Column="1" Content="X" Width="8" Height="8" Foreground="White"/>-->
-        </Grid>
+            <Button Grid.Column="1" Content="X" Width="8" Height="8" Foreground="White"/>
+        </Grid>-->
     </Grid>
 </UserControl>

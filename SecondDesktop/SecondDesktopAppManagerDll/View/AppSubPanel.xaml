@@ -65,7 +65,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontSize="10" Foreground="White" Margin="0" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" FontSize="10" Foreground="White" Margin="0" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

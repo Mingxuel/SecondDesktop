@@ -55,15 +55,14 @@ namespace SecondDesktopDesktopManagerDll
         {
             if (desktopManager == null)
             {
-                desktopManager = Init();
+                Init();
             }
 
             return desktopManager;
         }
 
-        private static DesktopManager Init()
+        private static void Init()
         {
-            DesktopManager manager = null;
             ConfigPath = ConfigManager.GetInstance().SystemConfigDirectory + "desktop.config";
             if (!File.Exists(ConfigPath))
             {
@@ -77,11 +76,13 @@ namespace SecondDesktopDesktopManagerDll
             json = MD5.Decrypt(json);
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
             DataContractJsonSerializer deseralizer = new DataContractJsonSerializer(typeof(DesktopManager));
-            manager = (DesktopManager)deseralizer.ReadObject(ms);
+            desktopManager = (DesktopManager)deseralizer.ReadObject(ms);
+            SecondDesktopMessager.GetInstance().CreateSubAppConfigNotify += desktopManager.CreateSubAppConfig;
 
-            SecondDesktopMessager.GetInstance().CreateSubAppConfigNotify += manager.CreateSubAppConfig;
-
-            return manager;
+            if(desktopManager.PageList.Count() == 0)
+            {
+                desktopManager.AddPage(0, "DESKTOP");
+            }
         }
 
         public string CreateSubAppConfig(string AppUID)

@@ -20,9 +20,10 @@ namespace SecondDesktopAppStore
 	/// </summary>
 	public partial class MainWindow : UserControl
 	{
-		public MainWindow(string pConfig)
-		{
-			InitializeComponent();
-		}
+        public MainWindow(string pConfig)
+        {
+            InitializeComponent();
+            this.DataContext = new VMMainWindow();
+        }
 	}
 }

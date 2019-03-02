@@ -62,7 +62,7 @@
                     </TextBlock>
                 </Grid>
             </Border>
-            <WrapPanel Name="wpAppPanel" Grid.Row="2" Background="White" Opacity="0.8" Visibility="{Binding AppMainWindowVisibility}" Panel.ZIndex="2"/>
+            <WrapPanel Name="wpAppPanel" Grid.Row="1" Grid.RowSpan="3" Visibility="{Binding AppMainWindowVisibility, Mode=TwoWay}" Panel.ZIndex="3" VerticalAlignment="Stretch" Background="Black" Opacity="0.8"/>
             <ScrollViewer Name="svDesktop" Grid.Row="2" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1" Background="#3D3D3D">
                 <WrapPanel Name="wpDesktop"/>
             </ScrollViewer>

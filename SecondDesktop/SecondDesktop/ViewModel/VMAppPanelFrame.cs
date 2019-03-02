@@ -2,28 +2,20 @@
 
 namespace SecondDesktop
 {
-    class VMAppPanelFrame : NotifyPropertyChanged
+    class VMAppPanelFrame : NotifyObject
     {
         public MAppPanelFrame Model { get; set; }
         public VMAppPanelFrame()
         {
             Model = new MAppPanelFrame();
         }
-        public double Width
+        public string Title
         {
-            get { return Model.Width; }
+            get { return Model.Title; }
             set
             {
-                this.SetAndNotify(ref Model.Width, value, () => Model.Width);
-            }
-        }
-
-        public double Height
-        {
-            get { return Model.Height; }
-            set
-            {
-                this.SetAndNotify(ref Model.Height, value, () => Model.Height);
+                Model.Title = value;
+                RaisePropertyChanged("Title");
             }
         }
     }
