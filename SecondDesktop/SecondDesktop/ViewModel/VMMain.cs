@@ -11,6 +11,7 @@ using SecondDesktopDll;
 using SecondDesktopAppManagerDll;
 using System.Runtime.Serialization;
 using SecondDesktopDesktopManagerDll;
+using System.Windows.Media.Imaging;
 
 namespace SecondDesktop
 {
@@ -29,9 +30,11 @@ namespace SecondDesktop
             CurrentPage = 0;
             DesktopTitleReadOnly = true;
             DesktopTitleBackground = "#2D2D2D";
-            DesktopEdit = "Edit";
+			DesktopImage = SDResource.DesktopImage;
+			DesktopSettingImage = SDResource.SettingsImage;
+			DesktopAddImage = SDResource.AddImage;
 
-            LoadedCommand = new RelayCommand(new Action<object>(Loaded));
+			LoadedCommand = new RelayCommand(new Action<object>(Loaded));
             Update();
         }
 
@@ -162,17 +165,38 @@ namespace SecondDesktop
                 RaisePropertyChanged("DesktopTitleReadOnly");
             }
         }
-        public string DesktopEdit
-        {
-            get { return Model.DesktopEdit; }
-            set
-            {
-                Model.DesktopEdit = value;
-                RaisePropertyChanged("DesktopEdit");
-            }
-        }
 
-        [DataMember]
+		public BitmapImage DesktopImage
+		{
+			get { return Model.DesktopImage; }
+			set
+			{
+				Model.DesktopImage = value;
+				RaisePropertyChanged("DesktopImage");
+			}
+		}
+
+		public BitmapImage DesktopSettingImage
+		{
+			get { return Model.DesktopSettingImage; }
+			set
+			{
+				Model.DesktopSettingImage = value;
+				RaisePropertyChanged("DesktopSettingImage");
+			}
+		}
+
+		public BitmapImage DesktopAddImage
+		{
+			get { return Model.DesktopAddImage; }
+			set
+			{
+				Model.DesktopAddImage = value;
+				RaisePropertyChanged("DesktopAddImage");
+			}
+		}
+
+		[DataMember]
         public ObservableCollection<DesktopItem> DesktopItems
         {
             get
@@ -200,7 +224,7 @@ namespace SecondDesktop
             }
         }
 
-        private SDCommand<int> pageClickCommand;
+		private SDCommand<int> pageClickCommand;
         public SDCommand<int> PageClickCommand
         {
             get
@@ -228,15 +252,15 @@ namespace SecondDesktop
                             if(DesktopTitleReadOnly)
                             {
                                 DesktopTitleReadOnly = false;
-                                DesktopTitleBackground = "#3D3D3D";
-                                DesktopEdit = "Save";
+                                DesktopTitleBackground = "#7D7D7D";
+								DesktopSettingImage = SDResource.SaveImage;
                             }
                             else
                             {
                                 DesktopTitleReadOnly = true;
                                 DesktopTitleBackground = "#2D2D2D";
-                                DesktopEdit = "Edit";
-                                DesktopManager.GetInstance().ModifyPage(CurrentPage, DesktopTitle);
+								DesktopSettingImage = SDResource.SettingsImage;
+								DesktopManager.GetInstance().ModifyPage(CurrentPage, DesktopTitle);
                             }
                         }), null);
                 return editClickCommand;

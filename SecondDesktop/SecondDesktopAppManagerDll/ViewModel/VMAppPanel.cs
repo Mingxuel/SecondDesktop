@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace SecondDesktopAppManagerDll
 {
@@ -18,33 +19,51 @@ namespace SecondDesktopAppManagerDll
         {
             Model = new MAppPanel();
             Height = ShowHeight;
-            Icon = "▽";
+			AppsImage = SDResource.AppsImage;
+			AppsSettingImage = SDResource.SettingsImage;
+			AppsFoldImage = SDResource.DownImage;
         }
 
-        private SDCommand<string> appClickCommand;
-        public SDCommand<string> AppClickCommand
+        private SDCommand<string> settingsClickCommand;
+        public SDCommand<string> SettingsClickCommand
         {
             get
             {
-                if (appClickCommand == null)
-                    appClickCommand = new SDCommand<string>(
+                if (settingsClickCommand == null)
+					settingsClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            if(Height != HideHeight)
-                            {
-                                Height = HideHeight;
-                                Icon = "△";
-                            } else
-                            {
-                                Height = ShowHeight;
-                                Icon = "▽";
-                            }
+
                         }), null);
-                return appClickCommand;
+                return settingsClickCommand;
             }
         }
 
-        public double Height
+		private SDCommand<string> foldClickCommand;
+		public SDCommand<string> FoldClickCommand
+		{
+			get
+			{
+				if (foldClickCommand == null)
+					foldClickCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							if (Height != HideHeight)
+							{
+								Height = HideHeight;
+								AppsFoldImage = SDResource.UpImage;
+							}
+							else
+							{
+								Height = ShowHeight;
+								AppsFoldImage = SDResource.DownImage;
+							}
+						}), null);
+				return foldClickCommand;
+			}
+		}
+
+		public double Height
         {
             get { return Model.Height; }
             set
@@ -54,14 +73,34 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-        public string Icon
-        {
-            get { return Model.Icon; }
-            set
-            {
-                Model.Icon = value;
-                RaisePropertyChanged("Icon");
-            }
-        }
-    }
+		public BitmapImage AppsImage
+		{
+			get { return Model.AppsImage; }
+			set
+			{
+				Model.AppsImage = value;
+				RaisePropertyChanged("AppsImage");
+			}
+		}
+
+		public BitmapImage AppsSettingImage
+		{
+			get { return Model.AppsSettingImage; }
+			set
+			{
+				Model.AppsSettingImage = value;
+				RaisePropertyChanged("AppsSettingImage");
+			}
+		}
+
+		public BitmapImage AppsFoldImage
+		{
+			get { return Model.AppsFoldImage; }
+			set
+			{
+				Model.AppsFoldImage = value;
+				RaisePropertyChanged("AppsFoldImage");
+			}
+		}
+	}
 }

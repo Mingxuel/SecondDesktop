@@ -7,7 +7,7 @@ namespace SecondDesktopAppManagerDll
     {
         [DataMember]
         public string Icon { get; set; }
-        [DataMember]
+		[DataMember]
         public string Name { get; set; }
         [DataMember]
         public string AppUID { get; set; }

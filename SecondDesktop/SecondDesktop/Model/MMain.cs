@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace SecondDesktop
 {
@@ -15,7 +16,7 @@ namespace SecondDesktop
         {
             DesktopItems = new ObservableCollection<DesktopItem>();
             DesktopPageItems = new ObservableCollection<DesktopPageItem>();
-        }
+		}
 
         public double Width;
         public double Height;
@@ -33,5 +34,9 @@ namespace SecondDesktop
 
         public ObservableCollection<DesktopItem> DesktopItems;
         public ObservableCollection<DesktopPageItem> DesktopPageItems;
-    }
+
+		public BitmapImage DesktopImage;
+		public BitmapImage DesktopSettingImage;
+		public BitmapImage DesktopAddImage;
+	}
 }

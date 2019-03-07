@@ -55,16 +55,34 @@
                                 <ColumnDefinition Width="36"/>
                                 <ColumnDefinition Width="6"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="0" Grid.Column="1">
-                                <Button.Background>
-                                    <ImageBrush ImageSource="{Binding Icon, Mode=TwoWay}" Stretch="Fill"/>
-                                </Button.Background>
+                            <Grid Name="ButtonGrid" Grid.Row="0" Grid.Column="1">
+                                <Button Click="Button_Click" MouseEnter="Button_MouseEnter">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <ContentControl>
+                                                <Border>
+                                                    <StackPanel>
+                                                        <StackPanel.Background>
+                                                            <ImageBrush ImageSource="{Binding Icon, Mode=TwoWay}" Stretch="Fill"/>
+                                                        </StackPanel.Background>
+                                                    </StackPanel>
+                                                </Border>
+                                            </ContentControl>
+                                        </ControlTemplate>
+                                    </Button.Template>
                                     <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
+                                        <i:EventTrigger EventName="MouseEnter">
+                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.MouseEnterCommand, ElementName=ICApp}" CommandParameter="{Binding Path=Background,ElementName=ButtonGrid, Mode=TwoWay}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeave">
+                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.MouseLeaveCommand, ElementName=ICApp}" CommandParameter="{Binding Path=Background,ElementName=ButtonGrid, Mode=TwoWay}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="Click">
+                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
+                            </Grid>
                             <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" FontSize="10" Foreground="White" Margin="0" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </Grid>
                     </DataTemplate>

@@ -16,19 +16,31 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="15"/>
-                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="3"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Text="APPS" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="3" Text="{Binding Icon}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Image Grid.Column="1" Source="{Binding AppsImage, Mode=TwoWay}"/>
+                <TextBlock Grid.Column="3" Text="APPS" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                <Image Grid.Column="5" Source="{Binding AppsSettingImage, Mode=TwoWay}" Width="16">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                            <cmd:SDEventCommand Command="{Binding AppClickCommand}" CommandParameter=""/>
+                        <i:EventTrigger EventName="PreviewMouseDown">
+                            <cmd:SDEventCommand Command="{Binding SettingsClickCommand}" CommandParameter=""/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </TextBlock>
+                </Image>
+                    <Image Grid.Column="7" Source="{Binding AppsFoldImage, Mode=TwoWay}" Width="16">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <cmd:SDEventCommand Command="{Binding FoldClickCommand}" CommandParameter=""/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
             </Grid>
         </Border>
         <local:AppSubPanel Grid.Row="1" Background="#3D3D3D"/>

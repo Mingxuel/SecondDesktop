@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SecondDesktopAppManagerDll
 {
@@ -58,7 +60,37 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-        private SDCommand<string> appClickCommand;
+		private SDCommand<MouseEventArgs> mouseEnterCommand;
+		public SDCommand<MouseEventArgs> MouseEnterCommand
+		{
+			get
+			{
+				if (mouseEnterCommand == null)
+					mouseEnterCommand = new SDCommand<MouseEventArgs>(
+						new Action<MouseEventArgs>(e =>
+						{
+							string ss = e.ToString();
+						}), null);
+				return mouseEnterCommand;
+			}
+		}
+
+		private SDCommand<Grid> mouseLeaveCommand;
+		public SDCommand<Grid> MouseLeaveCommand
+		{
+			get
+			{
+				if (mouseLeaveCommand == null)
+					mouseLeaveCommand = new SDCommand<Grid>(
+						new Action<Grid>(e =>
+						{
+							e.Background = Brushes.Transparent;
+						}), null);
+				return mouseLeaveCommand;
+			}
+		}
+
+		private SDCommand<string> appClickCommand;
         public SDCommand<string> AppClickCommand
         {
             get
@@ -89,7 +121,17 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-        public void Update()
+		public string Icon
+		{
+			get { return Model.Icon; }
+			set
+			{
+				Model.Icon = value;
+				RaisePropertyChanged("Icon");
+			}
+		}
+
+		public void Update()
         {
             PageItems.Clear();
             foreach (var item in AppManager.GetInstance().PageList)

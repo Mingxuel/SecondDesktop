@@ -74,6 +74,7 @@
     <Compile Include="SDCommandGeneric.cs" />
     <Compile Include="SDEventCommand.cs" />
     <Compile Include="SDMessageManager.cs" />
+    <Compile Include="SDResource.cs" />
     <Compile Include="SDSystem.cs" />
     <Compile Include="StringArgs.cs" />
     <Compile Include="ViewModelBase.cs" />

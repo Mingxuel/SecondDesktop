@@ -32,34 +32,37 @@
                 <RowDefinition Height="2"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="0" Height="60" Background="#1D1D1D">
-                <Label Content="SECOND DESKTOP" Margin="8,0,0,0" FontSize="18" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
+                <Label Content="SECOND DESKTOP" Margin="8,0,0,0" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
             </Grid>
             <Border Grid.Row="1" BorderBrush="White" BorderThickness="0" Background="#2D2D2D">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="0"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="3"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="1" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Foreground="White" Background="{Binding DesktopTitleBackground, Mode=TwoWay}" BorderThickness="0" Width="200" VerticalAlignment="Center" IsReadOnly="{Binding DesktopTitleReadOnly, Mode=TwoWay}" CaretBrush="#2D2D2D" />
-                    <TextBlock Grid.Column="3" Text="{Binding DesktopEdit, Mode=TwoWay}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Image Grid.Column="1" Source="{Binding DesktopImage, Mode=TwoWay}"/>
+                    <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Foreground="White" Background="{Binding DesktopTitleBackground, Mode=TwoWay}" BorderThickness="0" Width="200" VerticalAlignment="Center" IsReadOnly="{Binding DesktopTitleReadOnly, Mode=TwoWay}" CaretBrush="#2D2D2D" />
+                    <Image Grid.Column="5" Source="{Binding DesktopSettingImage, Mode=TwoWay}" Width="16">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:EventTrigger EventName="PreviewMouseDown">
                                 <cmd:SDEventCommand Command="{Binding EditClickCommand}" CommandParameter=""/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </TextBlock>
-                    <TextBlock Grid.Column="5" Text="Add" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    </Image>
+                    <Image Grid.Column="7" Source="{Binding DesktopAddImage, Mode=TwoWay}" Width="16">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:EventTrigger EventName="PreviewMouseDown">
                                 <cmd:SDEventCommand Command="{Binding AddClickCommand}" CommandParameter=""/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </TextBlock>
+                    </Image>
                 </Grid>
             </Border>
             <WrapPanel Name="wpAppPanel" Grid.Row="1" Grid.RowSpan="3" Visibility="{Binding AppMainWindowVisibility, Mode=TwoWay}" Panel.ZIndex="3" VerticalAlignment="Stretch" Background="Black" Opacity="0.8"/>

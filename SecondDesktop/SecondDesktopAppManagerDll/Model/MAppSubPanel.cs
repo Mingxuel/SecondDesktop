@@ -16,5 +16,6 @@ namespace SecondDesktopAppManagerDll
         }
         public ObservableCollection<AppItem> AppItems;
         public ObservableCollection<AppPageItem> PageItems;
-    }
+		public string Icon;
+	}
 }
