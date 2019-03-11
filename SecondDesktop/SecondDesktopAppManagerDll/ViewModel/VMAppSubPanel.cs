@@ -28,7 +28,9 @@ namespace SecondDesktopAppManagerDll
 
         public void Init()
         {
+            DeleteVisibility = Visibility.Hidden;
             AppManager.GetInstance().Update += Update;
+            AppManager.GetInstance().SettingAppNotify += SettingApp;
             Update();
         }
 
@@ -60,7 +62,20 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-		private SDCommand<MouseEventArgs> mouseEnterCommand;
+        public Visibility DeleteVisibility
+        {
+            get
+            {
+                return Model.DeleteVisibility;
+            }
+            set
+            {
+                Model.DeleteVisibility = value;
+                RaisePropertyChanged("DeleteVisibility");
+            }
+        }
+
+        private SDCommand<MouseEventArgs> mouseEnterCommand;
 		public SDCommand<MouseEventArgs> MouseEnterCommand
 		{
 			get
@@ -105,6 +120,21 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
+        private SDCommand<string> appDeleteCommand;
+        public SDCommand<string> AppDeleteCommand
+        {
+            get
+            {
+                if (appDeleteCommand == null)
+                    appDeleteCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            MessageBox.Show(e);
+                        }), null);
+                return appDeleteCommand;
+            }
+        }
+
         private SDCommand<int> pageClickCommand;
         public SDCommand<int> PageClickCommand
         {
@@ -121,17 +151,7 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-		public string Icon
-		{
-			get { return Model.Icon; }
-			set
-			{
-				Model.Icon = value;
-				RaisePropertyChanged("Icon");
-			}
-		}
-
-		public void Update()
+        public void Update()
         {
             PageItems.Clear();
             foreach (var item in AppManager.GetInstance().PageList)
@@ -173,6 +193,18 @@ namespace SecondDesktopAppManagerDll
                 {
                     AppItems.Add(item);
                 }
+            }
+        }
+
+        public void SettingApp(bool IsSetting)
+        {
+            if (IsSetting)
+            {
+                DeleteVisibility = Visibility.Visible;
+            }
+            else
+            {
+                DeleteVisibility = Visibility.Hidden;
             }
         }
     }

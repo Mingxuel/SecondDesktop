@@ -7,6 +7,9 @@
              xmlns:local="clr-namespace:SecondDesktopAppManagerDll"
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
              mc:Ignorable="d" Height="144">
+    <UserControl.Resources>
+        <x:Static Member="cmd:SDResource.DeleteImage" x:Key="DeleteImage"/>
+    </UserControl.Resources>
     <WrapPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -55,34 +58,98 @@
                                 <ColumnDefinition Width="36"/>
                                 <ColumnDefinition Width="6"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Name="ButtonGrid" Grid.Row="0" Grid.Column="1">
-                                <Button Click="Button_Click" MouseEnter="Button_MouseEnter">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <ContentControl>
-                                                <Border>
-                                                    <StackPanel>
-                                                        <StackPanel.Background>
-                                                            <ImageBrush ImageSource="{Binding Icon, Mode=TwoWay}" Stretch="Fill"/>
-                                                        </StackPanel.Background>
-                                                    </StackPanel>
-                                                </Border>
-                                            </ContentControl>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseEnter">
-                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.MouseEnterCommand, ElementName=ICApp}" CommandParameter="{Binding Path=Background,ElementName=ButtonGrid, Mode=TwoWay}"/>
-                                        </i:EventTrigger>
-                                        <i:EventTrigger EventName="MouseLeave">
-                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.MouseLeaveCommand, ElementName=ICApp}" CommandParameter="{Binding Path=Background,ElementName=ButtonGrid, Mode=TwoWay}"/>
-                                        </i:EventTrigger>
-                                        <i:EventTrigger EventName="Click">
-                                            <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </Button>
-                            </Grid>
+                            <Button Grid.Row="0" Grid.Column="1" Background="Transparent">
+                                <Button.Content>
+                                    <Image Source="{Binding Icon, Mode=TwoWay}" Stretch="Fill"/>
+                                </Button.Content>
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" >
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF0E6198" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Grid.Row="0" Grid.Column="1" Background="#FFCA5100" Width="13" Height="13" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-6, -6, 0" Visibility="{Binding DataContext.DeleteVisibility, ElementName=ICApp, Mode=TwoWay}">
+                                <Button.Content>
+                                    <Image Source="{StaticResource ResourceKey=DeleteImage}" Stretch="Fill"/>
+                                </Button.Content>
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFFF0000" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFD2806A" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFCA5100" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.AppDeleteCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
                             <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" FontSize="10" Foreground="White" Margin="0" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </Grid>
                     </DataTemplate>

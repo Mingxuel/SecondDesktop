@@ -18,6 +18,9 @@ namespace SecondDesktopAppManagerDll
         public delegate void SelectAppNotifyDelegate(string AppUID);
         public event SelectAppNotifyDelegate SelectAppNotify;
 
+        public delegate void SettingAppNotifyDelegate(bool IsSetting);
+        public event SettingAppNotifyDelegate SettingAppNotify;
+
         public List<AppItem> appItemList = null;
         public List<AppItem> AppItemList {
             get
@@ -139,7 +142,12 @@ namespace SecondDesktopAppManagerDll
             SelectAppNotify(AppUID);
         }
 
-		public bool ExistsApp(string pAppUID)
+        public void SettingApp(bool IsSetting)
+        {
+            SettingAppNotify(IsSetting);
+        }
+
+        public bool ExistsApp(string pAppUID)
 		{
 			foreach (AppItem item in AppItemList)
 			{

@@ -15,6 +15,8 @@ namespace SecondDesktopAppManagerDll
         private const double HideHeight = 20;
         private const double ShowHeight = 175;
 
+        private bool IsSetting = false;
+
         public VMAppPanel()
         {
             Model = new MAppPanel();
@@ -33,7 +35,16 @@ namespace SecondDesktopAppManagerDll
 					settingsClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-
+                            if(IsSetting)
+                            {
+                                IsSetting = false;
+                                AppsSettingImage = SDResource.SettingsImage;
+                            } else
+                            {
+                                IsSetting = true;
+                                AppsSettingImage = SDResource.SaveImage;
+                            }
+                            AppManager.GetInstance().SettingApp(IsSetting);
                         }), null);
                 return settingsClickCommand;
             }

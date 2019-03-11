@@ -240,13 +240,13 @@ namespace SecondDesktop
             }
         }
 
-        private SDCommand<string> editClickCommand;
-        public SDCommand<string> EditClickCommand
+        private SDCommand<string> settingsClickCommand;
+        public SDCommand<string> SettingsClickCommand
         {
             get
             {
-                if (editClickCommand == null)
-                    editClickCommand = new SDCommand<string>(
+                if (settingsClickCommand == null)
+                    settingsClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
                             if(DesktopTitleReadOnly)
@@ -263,7 +263,7 @@ namespace SecondDesktop
 								DesktopManager.GetInstance().ModifyPage(CurrentPage, DesktopTitle);
                             }
                         }), null);
-                return editClickCommand;
+                return settingsClickCommand;
             }
         }
 

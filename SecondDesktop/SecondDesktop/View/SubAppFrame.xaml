@@ -10,11 +10,16 @@
         <WrapPanel Width="344" VerticalAlignment="Stretch" Orientation="Vertical">
             <Grid Name="TitleBar" VerticalAlignment="Center" Height="12" Width="344">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="8"/>
                     <ColumnDefinition Width="4"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btClose" Grid.Column="1" Content="X" Width="8" Height="8" Foreground="White" Click="BtClose_Click"/>
+                <Image Grid.Column="1" Source="{Binding AppIcon, Mode=TwoWay}"/>
+                <TextBlock Grid.Column="3" Text="{Binding AppName, Mode=TwoWay}"/>
+                <Image Grid.Column="4" Source="{Binding AppIcon, Mode=TwoWay}"/>
             </Grid>
             <WrapPanel Name="ContentArea"  VerticalAlignment="Stretch"/>
         </WrapPanel>

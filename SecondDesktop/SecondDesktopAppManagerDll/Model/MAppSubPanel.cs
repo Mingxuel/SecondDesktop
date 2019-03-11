@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SecondDesktopAppManagerDll
 {
@@ -16,6 +17,6 @@ namespace SecondDesktopAppManagerDll
         }
         public ObservableCollection<AppItem> AppItems;
         public ObservableCollection<AppPageItem> PageItems;
-		public string Icon;
-	}
+        public Visibility DeleteVisibility;
+    }
 }
