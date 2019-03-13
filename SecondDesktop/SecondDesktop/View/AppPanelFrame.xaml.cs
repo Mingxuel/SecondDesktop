@@ -25,12 +25,14 @@ namespace SecondDesktop
         public delegate void CloseDelegate();
         public event CloseDelegate CloseNotify;
 
-        public AppPanelFrame()
+		VMAppPanelFrame ViewModel = null;
+		public AppPanelFrame()
         {
             InitializeComponent();
-            this.DataContext = new VMAppPanelFrame();
-            CloseNotify += CloseWindow;
-        }
+			ViewModel = new VMAppPanelFrame();
+			this.DataContext = ViewModel;
+			ViewModel.CloseNotify += CloseWindow;
+		}
 
         public void Add(UserControl pUserControl, string pAppUID)
         {
@@ -40,20 +42,17 @@ namespace SecondDesktop
                 if(item.AppUID == pAppUID)
                 {
                     ((VMAppPanelFrame)this.DataContext).Title = item.Name;
-                    break;
+					((VMAppPanelFrame)this.DataContext).Icon = item.Icon;
+
+					break;
                 }
             }
         }
 
-        private void BtClose_Click(object sender, RoutedEventArgs e)
-        {
-            ((WrapPanel)this.Parent).Children.Remove(this);
-            CloseNotify();
-        }
-
         public void CloseWindow()
         {
-
-        }
+			((WrapPanel)this.Parent).Children.Remove(this);
+			CloseNotify();
+		}
     }
 }
