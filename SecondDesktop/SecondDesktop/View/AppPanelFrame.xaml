@@ -61,7 +61,7 @@
                         </Style>
                     </Button.Style>
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PreviewMouseDown">
+                        <i:EventTrigger EventName="Click">
                             <cmd:SDEventCommand Command="{Binding CloseClickCommand}" CommandParameter=""/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>

@@ -26,6 +26,7 @@ namespace SecondDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        VMMain ViewModel = null;
         private bool IsShow = true;
         readonly Dictionary<string, short> hotKeyDic = new Dictionary<string, short>();
         public MainWindow()
@@ -35,7 +36,8 @@ namespace SecondDesktop
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new VMMain();
+            ViewModel = new VMMain();
+            this.DataContext = ViewModel;
             ((VMMain)this.DataContext).SelectPageNotify += SelectPage;
             AppManager.GetInstance().SelectAppNotify += SelectApp;
             SecondDesktopMessager.GetInstance().CreateSubAppNotify += CreateSubApp;
@@ -153,15 +155,24 @@ namespace SecondDesktop
             Object obj = Activator.CreateInstance(factory);
             object[] parameters = new object[] { 0, AppManager.GetInstance().GetConfig(AppUID) };
             UserControl uc = (UserControl)method.Invoke(obj, parameters);
-            AppPanelFrame border = new AppPanelFrame();
-            border.CloseNotify += CloseApp;
-            border.Add(uc, AppUID);
+            foreach (var item in AppManager.GetInstance().AppItemList)
+            {
+                if (item.AppUID == AppUID)
+                {
+                    ViewModel.AppTitle = item.Name;
+                    ViewModel.AppIcon = item.Icon;
+                    ViewModel.AppCloseImage = SDResource.DeleteImage;
+                    break;
+                }
+            }
             wpAppPanel.Children.Clear();
-            wpAppPanel.Children.Add(border);
+            wpAppPanel.Children.Add(uc);
+            ViewModel.CloseAppNotify += CloseApp;
         }
 
         private void CloseApp()
         {
+            wpAppPanel.Children.Clear();
             ((VMMain)this.DataContext).AppMainWindowVisibility = Visibility.Hidden;
         }
 

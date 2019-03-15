@@ -20,6 +20,9 @@ namespace SecondDesktop
         public delegate void SelectPageDelegate(int Page);
         public event SelectPageDelegate SelectPageNotify;
 
+        public delegate void CloseAppDelegate();
+        public event CloseAppDelegate CloseAppNotify;
+
         public MMain Model { get; set; }
         public VMMain()
         {
@@ -290,6 +293,51 @@ namespace SecondDesktop
                             Update();
                         }), null);
                 return addClickCommand;
+            }
+        }
+
+        public string AppTitle
+        {
+            get { return Model.AppTitle; }
+            set
+            {
+                Model.AppTitle = value;
+                RaisePropertyChanged("AppTitle");
+            }
+        }
+
+        private SDCommand<string> appCloseClickCommand;
+        public SDCommand<string> AppCloseClickCommand
+        {
+            get
+            {
+                if (appCloseClickCommand == null)
+                    appCloseClickCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            CloseAppNotify();
+                        }), null);
+                return appCloseClickCommand;
+            }
+        }
+
+        public string AppIcon
+        {
+            get { return Model.AppIcon; }
+            set
+            {
+                Model.AppIcon = value;
+                RaisePropertyChanged("AppIcon");
+            }
+        }
+
+        public BitmapImage AppCloseImage
+        {
+            get { return Model.AppCloseImage; }
+            set
+            {
+                Model.AppCloseImage = value;
+                RaisePropertyChanged("AppCloseImage");
             }
         }
 

@@ -83,7 +83,7 @@
                             </Style>
                         </Button.Style>
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseDown">
+                            <i:EventTrigger EventName="Click">
                                 <cmd:SDEventCommand Command="{Binding SettingsClickCommand}" CommandParameter=""/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -122,14 +122,76 @@
                             </Style>
                         </Button.Style>
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseDown">
+                            <i:EventTrigger EventName="Click">
                                 <cmd:SDEventCommand Command="{Binding AddClickCommand}" CommandParameter=""/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
                 </Grid>
             </Border>
-            <WrapPanel Name="wpAppPanel" Grid.Row="1" Grid.RowSpan="3" Visibility="{Binding AppMainWindowVisibility, Mode=TwoWay}" Panel.ZIndex="3" VerticalAlignment="Stretch" Background="#1D1D1D" Opacity="1.0"/>
+            <Border Grid.Row="1" Grid.RowSpan="3" Panel.ZIndex="3" BorderBrush="#007ACC" BorderThickness="2" Visibility="{Binding AppMainWindowVisibility, Mode=TwoWay}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Name="TitleBar" VerticalAlignment="Center" Height="20" Width="344" HorizontalAlignment="Stretch" Background="#007ACC">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="1" Source="{Binding AppIcon, Mode=TwoWay}" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="3" Text="{Binding AppTitle, Mode=TwoWay}" Foreground="White" VerticalAlignment="Center"/>
+                        <Button Grid.Column="5" Background="Transparent" Width="16" Height="16">
+                            <Button.Content>
+                                <Image Source="{Binding AppCloseImage, Mode=TwoWay}" Stretch="Fill"/>
+                            </Button.Content>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" >
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <cmd:SDEventCommand Command="{Binding AppCloseClickCommand}" CommandParameter=""/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </Grid>
+                    <ScrollViewer Grid.Row="1" Margin="0" VerticalScrollBarVisibility="Hidden" Background="#1D1D1D">
+                        <WrapPanel Grid.Row="1" Name="wpAppPanel" VerticalAlignment="Stretch" Orientation="Vertical"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
             <ScrollViewer Name="svDesktop" Grid.Row="2" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1" Background="#3D3D3D">
                 <WrapPanel Name="wpDesktop"/>
             </ScrollViewer>

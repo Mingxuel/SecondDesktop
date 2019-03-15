@@ -38,5 +38,9 @@ namespace SecondDesktop
 		public BitmapImage DesktopImage;
 		public BitmapImage DesktopSettingImage;
 		public BitmapImage DesktopAddImage;
-	}
+
+        public string AppIcon;
+        public string AppTitle;
+        public BitmapImage AppCloseImage;
+    }
 }

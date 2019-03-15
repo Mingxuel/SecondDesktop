@@ -159,7 +159,29 @@ namespace SecondDesktopAppManagerDll
 			return false;
 		}
 
-		public void AddApp(string pPath)
+        public AppItem LoadApp(string pPath)
+        {
+            AppItem item = new AppItem();
+
+            string appUID = pPath.Substring(pPath.LastIndexOf("\\") + 1);
+            item.AppUID = appUID;
+            string newPath = ConfigManager.GetInstance().ApplicationAppsDirectory + appUID;
+            CopyDirectory(pPath, newPath);
+            string[] fileList = Directory.GetFileSystemEntries(newPath);
+            foreach (string file in fileList)
+            {
+                if (file.Contains(".png"))
+                {
+                    item.Icon = file;
+                    item.Name = file.Substring(file.LastIndexOf("\\") + 1).Replace(".png", "");
+                    break;
+                }
+            }
+
+            return item;
+        }
+
+        public void AddApp(string pPath, AppStatus pStatus = AppStatus.Normal)
 		{
 			AppItem item = new AppItem();
 
@@ -178,7 +200,7 @@ namespace SecondDesktopAppManagerDll
 				}
 			}
 			item.Config = GetConfig(appUID);
-			item.Status = AppStatus.System;
+			item.Status = pStatus;
 			AddApp(item);
 		}
 
