@@ -169,7 +169,7 @@ namespace SecondDesktop
             }
         }
 
-		public BitmapImage DesktopImage
+		public string DesktopImage
 		{
 			get { return Model.DesktopImage; }
 			set
@@ -179,7 +179,7 @@ namespace SecondDesktop
 			}
 		}
 
-		public BitmapImage DesktopSettingImage
+		public string DesktopSettingImage
 		{
 			get { return Model.DesktopSettingImage; }
 			set
@@ -189,7 +189,7 @@ namespace SecondDesktop
 			}
 		}
 
-		public BitmapImage DesktopAddImage
+		public string DesktopAddImage
 		{
 			get { return Model.DesktopAddImage; }
 			set
@@ -331,7 +331,7 @@ namespace SecondDesktop
             }
         }
 
-        public BitmapImage AppCloseImage
+        public string AppCloseImage
         {
             get { return Model.AppCloseImage; }
             set

@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\SecondDesktop\bin\Debug\</OutputPath>
+    <OutputPath>..\SecondDesktop\bin\Debug\AppDemo\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\SecondDesktop\bin\Release\</OutputPath>
+    <OutputPath>..\SecondDesktop\bin\Release\AppDemo\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -75,9 +75,17 @@
       <Name>SecondDesktopMessagerDll</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppDemo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Debug\$(ProjectName)\"
+
+xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Release\$(ProjectName)\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

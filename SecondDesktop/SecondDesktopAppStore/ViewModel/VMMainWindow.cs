@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using SecondDesktopDll;
 using SecondDesktopAppManagerDll;
+using System.Runtime.Serialization;
 
 namespace SecondDesktopAppStore
 {
-    class VMMainWindow : NotifyObject
+	[DataContract]
+	class VMMainWindow : NotifyObject
     {
         public MMainWindow Model { get; set; }
         public VMMainWindow()
@@ -39,7 +41,8 @@ namespace SecondDesktopAppStore
                     }
                 }
 
-                appStoreItem.Icon = appItem.Icon;
+				appStoreItem.AppUID = appItem.AppUID;
+				appStoreItem.Icon = appItem.Icon;
                 appStoreItem.Title = appItem.Name;
                 if (exist)
                 {
@@ -52,7 +55,8 @@ namespace SecondDesktopAppStore
             }
         }
 
-        public ObservableCollection<AppStoreItem> AppItems
+		[DataMember]
+		public ObservableCollection<AppStoreItem> AppItems
         {
             get
             {
@@ -64,5 +68,24 @@ namespace SecondDesktopAppStore
                 RaisePropertyChanged("AppItems");
             }
         }
-    }
+
+		private SDCommand<string> activeCommand;
+		public SDCommand<string> ActiveCommand
+		{
+			get
+			{
+				if (activeCommand == null)
+					activeCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							if(!AppManager.GetInstance().ExistsApp(e))
+							{
+								AppManager.GetInstance().AddApp(ConfigManager.GetInstance().ApplicationAppsDirectory + e);
+							}
+							
+						}), null);
+				return activeCommand;
+			}
+		}
+	}
 }

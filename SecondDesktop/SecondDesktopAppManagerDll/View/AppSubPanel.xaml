@@ -8,7 +8,7 @@
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
              mc:Ignorable="d" Height="144">
     <UserControl.Resources>
-        <x:Static Member="cmd:SDResource.DeleteImage" x:Key="DeleteImage"/>
+        <BitmapImage UriSource="pack://siteoforigin:,,,/Resource/App/Delete.png" x:Key="DeleteImage"/>
     </UserControl.Resources>
     <WrapPanel>
         <Grid>

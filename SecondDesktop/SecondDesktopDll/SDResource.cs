@@ -9,18 +9,18 @@ namespace SecondDesktopDll
 {
 	public class SDResource
 	{
-		public static readonly BitmapImage AddImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Add.png", UriKind.Absolute));
-		public static readonly BitmapImage AppsImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Apps.png", UriKind.Absolute));
-		public static readonly BitmapImage DeleteImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Delete.png", UriKind.Absolute));
-		public static readonly BitmapImage DesktopImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Desktop.png", UriKind.Absolute));
-		public static readonly BitmapImage UpImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Up.png", UriKind.Absolute));
-		public static readonly BitmapImage DownImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Down.png", UriKind.Absolute));
-		public static readonly BitmapImage LogoImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Logo.png", UriKind.Absolute));
-		public static readonly BitmapImage MoveBottomImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/MoveBottom.png", UriKind.Absolute));
-		public static readonly BitmapImage MoveTopImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/MoveTop.png", UriKind.Absolute));
-		public static readonly BitmapImage MoveLeftImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/MoveLeft.png", UriKind.Absolute));
-		public static readonly BitmapImage MoveRightImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/MoveRight.png", UriKind.Absolute));
-		public static readonly BitmapImage SaveImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Save.png", UriKind.Absolute));
-		public static readonly BitmapImage SettingsImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/Settings.png", UriKind.Absolute));
+		public static readonly string AddImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Add.png";
+		public static readonly string AppsImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Apps.png";
+		public static readonly string DeleteImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Delete.png";
+		public static readonly string DesktopImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Desktop.png";
+		public static readonly string UpImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Up.png";
+		public static readonly string DownImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Down.png";
+		public static readonly string LogoImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Logo.png";
+		public static readonly string MoveBottomImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/MoveBottom.png";
+		public static readonly string MoveTopImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/MoveTop.png";
+		public static readonly string MoveLeftImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/MoveLeft.png";
+		public static readonly string MoveRightImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/MoveRight.png";
+		public static readonly string SaveImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Save.png";
+		public static readonly string SettingsImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/Settings.png";
 	}
 }

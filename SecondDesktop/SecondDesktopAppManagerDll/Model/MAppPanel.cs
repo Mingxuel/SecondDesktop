@@ -11,8 +11,8 @@ namespace SecondDesktopAppManagerDll
     class MAppPanel
     {
         public double Height;
-		public BitmapImage AppsImage;
-		public BitmapImage AppsSettingImage;
-		public BitmapImage AppsFoldImage;
+		public string AppsImage;
+		public string AppsSettingImage;
+		public string AppsFoldImage;
 	}
 }

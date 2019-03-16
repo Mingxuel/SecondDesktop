@@ -50,7 +50,7 @@ namespace SecondDesktop
 			}
 		}
 
-		public BitmapImage CloseImage
+		public string CloseImage
 		{
 			get { return Model.CloseImage; }
 			set

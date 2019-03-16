@@ -35,12 +35,12 @@ namespace SecondDesktop
         public ObservableCollection<DesktopItem> DesktopItems;
         public ObservableCollection<DesktopPageItem> DesktopPageItems;
 
-		public BitmapImage DesktopImage;
-		public BitmapImage DesktopSettingImage;
-		public BitmapImage DesktopAddImage;
+		public string DesktopImage;
+		public string DesktopSettingImage;
+		public string DesktopAddImage;
 
         public string AppIcon;
         public string AppTitle;
-        public BitmapImage AppCloseImage;
+        public string AppCloseImage;
     }
 }

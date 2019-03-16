@@ -11,6 +11,6 @@ namespace SecondDesktop
     {
 		public string Icon;
 		public string Title;
-		public BitmapImage CloseImage;
+		public string CloseImage;
 	}
 }

@@ -84,7 +84,7 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-		public BitmapImage AppsImage
+		public string AppsImage
 		{
 			get { return Model.AppsImage; }
 			set
@@ -94,7 +94,7 @@ namespace SecondDesktopAppManagerDll
 			}
 		}
 
-		public BitmapImage AppsSettingImage
+		public string AppsSettingImage
 		{
 			get { return Model.AppsSettingImage; }
 			set
@@ -104,7 +104,7 @@ namespace SecondDesktopAppManagerDll
 			}
 		}
 
-		public BitmapImage AppsFoldImage
+		public string AppsFoldImage
 		{
 			get { return Model.AppsFoldImage; }
 			set
