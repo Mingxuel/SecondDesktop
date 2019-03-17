@@ -17,10 +17,10 @@
                     <ColumnDefinition Width="8"/>
                     <ColumnDefinition Width="4"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="{Binding AppIcon, Mode=TwoWay}"/>
-                <TextBlock Grid.Column="3" Text="{Binding AppName, Mode=TwoWay}"/>
-                <Image Grid.Column="4" Source="{Binding AppIcon, Mode=TwoWay}"/>
             </Grid>
+            <Image Grid.Column="1" Source="{}"/>
+            <TextBlock Grid.Column="3" Text="{}"/>
+            <Image Grid.Column="4" Source="{}"/>
             <WrapPanel Name="ContentArea"  VerticalAlignment="Stretch"/>
         </WrapPanel>
         <Grid Name="StatusBar" VerticalAlignment="Bottom" Height="12" Width="Auto" HorizontalAlignment="Stretch">

@@ -41,8 +41,8 @@ namespace SecondDesktop
             {
                 if(item.AppUID == pAppUID)
                 {
-                    ((VMAppPanelFrame)this.DataContext).Title = item.Name;
-					((VMAppPanelFrame)this.DataContext).Icon = item.Icon;
+					ViewModel.Title = item.Name;
+					ViewModel.Icon = item.Icon;
 
 					break;
                 }

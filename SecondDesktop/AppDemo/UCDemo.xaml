@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              Width="348" Height="100">
     <Grid>
-        <Button Content="{Binding Title, Mode=TwoWay}" Click="Button_Click"/>
+        <Button Content="nO" Click="Button_Click"/>
     </Grid>
 </UserControl>

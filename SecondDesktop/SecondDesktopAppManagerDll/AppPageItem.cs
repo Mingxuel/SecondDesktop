@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecondDesktopDll;
+using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Windows.Media.Imaging;
@@ -30,7 +31,7 @@ namespace SecondDesktopAppManagerDll
         }
         private bool isSelect = false;
         [DataMember]
-        public BitmapImage Image
+        public string Image
         {
             get
             {
@@ -41,9 +42,9 @@ namespace SecondDesktopAppManagerDll
                 image = value;
             }
         }
-        private BitmapImage image = null;
+        private string image = null;
 
-        private readonly BitmapImage focusImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/AppPageFocus.png", UriKind.Absolute));
-        private readonly BitmapImage unFocusImage = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resource/App/AppPageUnFocus.png", UriKind.Absolute));
+        private readonly string focusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageFocus.png";
+        private readonly string unFocusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageUnFocus.png";
     }
 }

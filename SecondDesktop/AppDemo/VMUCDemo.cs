@@ -15,16 +15,7 @@ namespace AppDemo
         public VMUCDemo()
         {
             Model = new MUCDemo();
-            Model.Title = "Hello Snoopy";
-        }
-
-        public string Title
-        {
-            get { return Model.Title; }
-            set
-            {
-                this.SetAndNotify(ref Model.Title, value, () => Model.Title);
-            }
+            //Title = "Hello Snoopy";
         }
     }
 

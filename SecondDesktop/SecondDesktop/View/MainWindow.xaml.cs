@@ -184,8 +184,8 @@ namespace SecondDesktop
             item.Config = Config;
             item.Page = ((VMMain)this.DataContext).CurrentPage;
 
-            Assembly assembly = Assembly.LoadFrom(AppUID + ".dll");
-            Type factory = assembly.GetType(AppUID + ".Factory");
+			Assembly assembly = Assembly.LoadFrom(ConfigManager.GetInstance().ApplicationAppsDirectory + AppUID + "\\" + AppUID + ".dll");
+			Type factory = assembly.GetType(AppUID + ".Factory");
             MethodInfo method = factory.GetMethod("CreateWindow");
             Object obj = Activator.CreateInstance(factory);
             object[] parameters = new object[] { SubAppUID, Config };
@@ -199,8 +199,8 @@ namespace SecondDesktop
 
         public void OpenSubApp(DesktopItem Item)
         {
-            Assembly assembly = Assembly.LoadFrom(Item.AppUID + ".dll");
-            Type factory = assembly.GetType(Item.AppUID + ".Factory");
+			Assembly assembly = Assembly.LoadFrom(ConfigManager.GetInstance().ApplicationAppsDirectory + Item.AppUID + "\\" + Item.AppUID + ".dll");
+			Type factory = assembly.GetType(Item.AppUID + ".Factory");
             MethodInfo method = factory.GetMethod("CreateWindow");
             Object obj = Activator.CreateInstance(factory);
             object[] parameters = new object[] { Item.SubAppUID, Item.Config };

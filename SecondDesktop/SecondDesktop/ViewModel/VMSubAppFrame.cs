@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SecondDesktop
 {
-    class VMSubAppFrame : NotifyPropertyChanged
-    {
+    class VMSubAppFrame : NotifyObject
+	{
         public MSubAppFrame Model { get; set; }
         public VMSubAppFrame()
         {
@@ -19,7 +19,8 @@ namespace SecondDesktop
             get { return Model.Width; }
             set
             {
-                this.SetAndNotify(ref Model.Width, value, () => Model.Width);
+				Model.Width = value;
+				RaisePropertyChanged("Width");
             }
         }
 
@@ -28,7 +29,8 @@ namespace SecondDesktop
             get { return Model.Height; }
             set
             {
-                this.SetAndNotify(ref Model.Height, value, () => Model.Height);
+				Model.Height = value;
+				RaisePropertyChanged("Height");
             }
         }
     }
