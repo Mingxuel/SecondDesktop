@@ -75,36 +75,6 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
-        private SDCommand<MouseEventArgs> mouseEnterCommand;
-		public SDCommand<MouseEventArgs> MouseEnterCommand
-		{
-			get
-			{
-				if (mouseEnterCommand == null)
-					mouseEnterCommand = new SDCommand<MouseEventArgs>(
-						new Action<MouseEventArgs>(e =>
-						{
-							string ss = e.ToString();
-						}), null);
-				return mouseEnterCommand;
-			}
-		}
-
-		private SDCommand<Grid> mouseLeaveCommand;
-		public SDCommand<Grid> MouseLeaveCommand
-		{
-			get
-			{
-				if (mouseLeaveCommand == null)
-					mouseLeaveCommand = new SDCommand<Grid>(
-						new Action<Grid>(e =>
-						{
-							e.Background = Brushes.Transparent;
-						}), null);
-				return mouseLeaveCommand;
-			}
-		}
-
 		private SDCommand<string> appClickCommand;
         public SDCommand<string> AppClickCommand
         {
@@ -129,7 +99,7 @@ namespace SecondDesktopAppManagerDll
                     appDeleteCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            MessageBox.Show(e);
+                            AppManager.GetInstance().DeleteApp(e);
                         }), null);
                 return appDeleteCommand;
             }

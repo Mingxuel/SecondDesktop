@@ -38,6 +38,7 @@ namespace SecondDesktop
 		public string DesktopImage;
 		public string DesktopSettingImage;
 		public string DesktopAddImage;
+        public string DesktopDeleteImage;
 
         public string AppIcon;
         public string AppTitle;

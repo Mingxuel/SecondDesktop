@@ -160,13 +160,28 @@ namespace SecondDesktopDesktopManagerDll
             SaveSubApp();
         }
 
+        public void DeletePage(int Page)
+        {
+            PageList.Remove(Page);
+            for(int i = 0; i<DesktopItemList.Count; i++)
+            {
+                if(DesktopItemList.ElementAt(i).Page == Page)
+                {
+                    DesktopItemList.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            SaveSubApp();
+        }
+
         public void ModifyPage(int Page, string Title)
         {
             PageList[Page] = Title;
             SaveSubApp();
         }
 
-        private void SaveSubApp()
+        public void SaveSubApp()
         {
             DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopManager));
             MemoryStream memoryStream = new MemoryStream();

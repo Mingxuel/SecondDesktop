@@ -11,6 +11,7 @@ using SecondDesktopDll;
 using SecondDesktopAppManagerDll;
 using System.Runtime.Serialization;
 using SecondDesktopDesktopManagerDll;
+using SecondDesktopMessagerDll;
 using System.Windows.Media.Imaging;
 
 namespace SecondDesktop
@@ -36,8 +37,10 @@ namespace SecondDesktop
 			DesktopImage = SDResource.DesktopImage;
 			DesktopSettingImage = SDResource.SettingsImage;
 			DesktopAddImage = SDResource.AddImage;
+            DesktopDeleteImage = SDResource.DeleteImage;
 
-			LoadedCommand = new RelayCommand(new Action<object>(Loaded));
+            LoadedCommand = new RelayCommand(new Action<object>(Loaded));
+            DesktopManager.GetInstance().Update += Update;
             Update();
         }
 
@@ -199,7 +202,17 @@ namespace SecondDesktop
 			}
 		}
 
-		[DataMember]
+        public string DesktopDeleteImage
+        {
+            get { return Model.DesktopDeleteImage; }
+            set
+            {
+                Model.DesktopDeleteImage = value;
+                RaisePropertyChanged("DesktopDeleteImage");
+            }
+        }
+
+        [DataMember]
         public ObservableCollection<DesktopItem> DesktopItems
         {
             get
@@ -237,6 +250,7 @@ namespace SecondDesktop
                         new Action<int>(e =>
                         {
                             CurrentPage = e;
+                            SecondDesktopMessager.GetInstance().DesktopSettings(!DesktopTitleReadOnly);
                             Update();
                         }), null);
                 return pageClickCommand;
@@ -257,6 +271,7 @@ namespace SecondDesktop
                                 DesktopTitleReadOnly = false;
                                 DesktopTitleBackground = "#7D7D7D";
 								DesktopSettingImage = SDResource.SaveImage;
+                                SecondDesktopMessager.GetInstance().DesktopSettings(true);
                             }
                             else
                             {
@@ -264,6 +279,7 @@ namespace SecondDesktop
                                 DesktopTitleBackground = "#2D2D2D";
 								DesktopSettingImage = SDResource.SettingsImage;
 								DesktopManager.GetInstance().ModifyPage(CurrentPage, DesktopTitle);
+                                SecondDesktopMessager.GetInstance().DesktopSettings(false);
                             }
                         }), null);
                 return settingsClickCommand;
@@ -293,6 +309,23 @@ namespace SecondDesktop
                             Update();
                         }), null);
                 return addClickCommand;
+            }
+        }
+
+        private SDCommand<string> deleteClickCommand;
+        public SDCommand<string> DeleteClickCommand
+        {
+            get
+            {
+                if (deleteClickCommand == null)
+                    deleteClickCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            DesktopManager.GetInstance().DeletePage(CurrentPage);
+                            CurrentPage = 0;
+                            Update();
+                        }), null);
+                return deleteClickCommand;
             }
         }
 

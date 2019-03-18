@@ -191,6 +191,7 @@ namespace SecondDesktop
             object[] parameters = new object[] { SubAppUID, Config };
             UserControl uc = (UserControl)method.Invoke(obj, parameters);
             SubAppFrame border = new SubAppFrame(item);
+            SecondDesktopMessager.GetInstance().DesktopSettings(!ViewModel.DesktopTitleReadOnly);
             border.Add(uc);
             wpDesktop.Children.Add(border);
 
@@ -206,6 +207,7 @@ namespace SecondDesktop
             object[] parameters = new object[] { Item.SubAppUID, Item.Config };
             UserControl uc = (UserControl)method.Invoke(obj, parameters);
             SubAppFrame border = new SubAppFrame(Item);
+            SecondDesktopMessager.GetInstance().DesktopSettings(!ViewModel.DesktopTitleReadOnly);
             border.Add(uc);
             wpDesktop.Children.Add(border);
         }

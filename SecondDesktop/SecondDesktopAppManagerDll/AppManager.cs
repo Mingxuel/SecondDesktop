@@ -249,6 +249,18 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
+        public void DeleteApp(string pAppUID)
+        {
+            foreach (AppItem item in AppItemList)
+            {
+                if (item.AppUID == pAppUID)
+                {
+                    DeleteApp(item);
+                    break;
+                }
+            }
+        }
+
         public void DeleteApp(AppItem item)
         {
             int page = item.Page;
@@ -285,7 +297,7 @@ namespace SecondDesktopAppManagerDll
             SaveApp();
         }
 
-        private void SaveApp()
+        public void SaveApp()
         {
             PageList.Clear();
             foreach(AppItem item in AppItemList)

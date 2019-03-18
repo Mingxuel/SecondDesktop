@@ -24,6 +24,7 @@ namespace AppDemo
         public SubApp(string Config)
         {
             InitializeComponent();
+            test.Content = Guid.NewGuid().ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
