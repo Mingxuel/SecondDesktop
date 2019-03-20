@@ -31,6 +31,8 @@ namespace AppDemo
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string config = Factory.CreateSubAppConfig();
+            SubAppConfigManager manager = new SubAppConfigManager(config);
+            manager.SetText(Guid.NewGuid().ToString());
             Factory.CreateSubApp(AppUID.SubApp, config);
         }
     }

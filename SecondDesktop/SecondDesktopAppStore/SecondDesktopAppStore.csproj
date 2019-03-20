@@ -96,8 +96,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Debug\$(ProjectName)"
+    <PostBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Debug\$(ProjectName)\"
 
-xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Release\$(ProjectName)"</PostBuildEvent>
+xcopy /Y "$(ProjectDir)*.png" "$(SolutionDir)$(SolutionName)\bin\Release\$(ProjectName)\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

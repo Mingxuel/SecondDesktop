@@ -14,6 +14,9 @@ namespace SecondDesktopMessagerDll
         public delegate string CreateSubAppConfigDelegate(string AppUID);
         public event CreateSubAppConfigDelegate CreateSubAppConfigNotify;
 
+        public delegate void DesktopSettingsDelegate(bool IsSetting);
+        public event DesktopSettingsDelegate DesktopSettingsNotify;
+
         private static SecondDesktopMessager secondDesktopMessager = null;
         public static SecondDesktopMessager GetInstance()
         {
@@ -33,6 +36,11 @@ namespace SecondDesktopMessagerDll
         public string CreateSubAppConfig(string AppUID)
         {
             return CreateSubAppConfigNotify(AppUID);
+        }
+
+        public void DesktopSettings(bool IsSetting)
+        {
+            DesktopSettingsNotify(IsSetting);
         }
     }
 }

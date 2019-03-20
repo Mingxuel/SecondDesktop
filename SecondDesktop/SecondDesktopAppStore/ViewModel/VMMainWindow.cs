@@ -25,6 +25,8 @@ namespace SecondDesktopAppStore
 
         private void Init()
         {
+            AppItems.Clear();
+
             string[] appsPath = Directory.GetDirectories(ConfigManager.GetInstance().ApplicationAppsDirectory);
 
             foreach(string path in appsPath)
@@ -81,8 +83,11 @@ namespace SecondDesktopAppStore
 							if(!AppManager.GetInstance().ExistsApp(e))
 							{
 								AppManager.GetInstance().AddApp(ConfigManager.GetInstance().ApplicationAppsDirectory + e);
-							}
-							
+							} else
+                            {
+                                AppManager.GetInstance().DeleteApp(e);
+                            }
+                            Init();
 						}), null);
 				return activeCommand;
 			}

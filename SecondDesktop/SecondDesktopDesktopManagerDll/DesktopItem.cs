@@ -18,5 +18,15 @@ namespace SecondDesktopDesktopManagerDll
         public int SubAppUID { get; set; }
         [DataMember]
         public string Config { get; set; }
+
+        public DesktopItem Clone()
+        {
+            DesktopItem item = new DesktopItem();
+            item.Page = Page;
+            item.AppUID = AppUID;
+            item.SubAppUID = SubAppUID;
+            item.Config = Config;
+            return item;
+        }
     }
 }

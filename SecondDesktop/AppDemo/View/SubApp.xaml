@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AppDemo.UCDemo"
+﻿<UserControl x:Class="AppDemo.SubApp"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              Width="348" Height="100">
     <Grid>
-        <Button Content="nO" Click="Button_Click"/>
+        <Button Name="test" Click="Button_Click"/>
     </Grid>
 </UserControl>

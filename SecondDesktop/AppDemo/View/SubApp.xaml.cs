@@ -24,6 +24,8 @@ namespace AppDemo
         public SubApp(string Config)
         {
             InitializeComponent();
+            SubAppConfigManager manager = new SubAppConfigManager(Config);
+            test.Content = manager.GetText();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

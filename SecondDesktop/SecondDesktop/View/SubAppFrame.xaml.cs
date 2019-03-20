@@ -21,16 +21,15 @@ namespace SecondDesktop
     /// </summary>
     public partial class SubAppFrame : UserControl
     {
-        public delegate void CloseDelegate();
-        public event CloseDelegate CloseNotify;
-
+        VMSubAppFrame ViewModule = null;
         private DesktopItem DI = null;
         public SubAppFrame(DesktopItem Item)
         {
             InitializeComponent();
-            this.DataContext = new VMSubAppFrame();
+            ViewModule = new VMSubAppFrame(Item);
+            this.DataContext = ViewModule;
             DI = Item;
-            CloseNotify += CloseWindow;
+            ViewModule.CloseNotify += CloseWindow;
         }
 
         public void Add(UserControl uc)
@@ -38,14 +37,9 @@ namespace SecondDesktop
             ContentArea.Children.Add(uc);
         }
 
-        private void BtClose_Click(object sender, RoutedEventArgs e)
-        {
-            ((WrapPanel)this.Parent).Children.Remove(this);
-            CloseNotify();
-        }
-
         private void CloseWindow()
         {
+            ((WrapPanel)this.Parent).Children.Remove(this);
             DesktopManager.GetInstance().DeleteSubApp(DI);
         }
     }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AppDemo.SubApp"
+﻿<UserControl x:Class="AppDemo.UCDemo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              Width="348" Height="100">
     <Grid>
-        <Button Click="Button_Click"/>
+        <Button Content="Add SubApp" Click="Button_Click"/>
     </Grid>
 </UserControl>
