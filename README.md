@@ -1,5 +1,10 @@
 # SECOND DESKTOP
-I will make the Second Desktop will be the best work-mate.
+&ensp;The Second Desktop is a toolbox, it will make your work more comfortable.  
+&ensp;The Windows Start Menu is a collection of application shortcuts, it is quick and also stupid.  
+&ensp;I think everyone has experienced the following operations:
+&ensp;&ensp;-If you want to edit enviment.  
+&ensp;&ensp;-If you want to edit Registry.  
+&ensp;&ensp;-If you want to open folder,just like c:/a/b/c/d.  
 ### Definitions
 ##### SD -- Second Desktop
 ##### SDA - Second Desktop App
