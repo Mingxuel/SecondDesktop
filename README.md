@@ -1,45 +1,41 @@
 # SECOND DESKTOP
 
-## 1.User
-### 1.1.Introduction
+## 1 User
+### 1.1 Introduction
     Second Desktop is a toolbox, it will make your work more comfortable.  
     The Windows Start Menu is a collection of application shortcuts, it is quick and also stupid.  
     Second Desktop will meet your needs in the easiest way.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SecondDesktop.png"/>  
     
-### 1.2.Features
+### 1.2 Features
   
   
-### 1.3.Configuring
+### 1.3 Configuring
     1. Windows XP/7/vista/8/10.  
     2. .netframework 4.6 or above.  
     
-### 1.4HOW TO USE
-    
-#### 1.4.1.Start
+### 1.4 HOW TO USE
+#### 1.4.1 Start
     1) Download release version(Please download the new version).  
     2) Double click SecondDesktop.exe.  
-    
-#### 1.4.2.Install App  
+#### 1.4.2 Install App  
     1) Click AppStore on the App Area.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png"/>
-    
     2) Click "Install" button to install app you want.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png"/>
-  
-#### 1.4.3.Install SubApp  
+#### 1.4.3 Install SubApp  
     1) Select Desktop page that you want to install.
     2) Click App you want to install.  
     3) Settings then install SubApp, you can see SubApp in the selected Desktop.  
 
 ----
 
-## 2.Delevoper
-### 2.1.Definitions
+## 2 Delevoper
+### 2.1 Definitions
     SD -- Second Desktop  
     SDA -- Second Desktop App  
 
-### 2.2.How to create your first SDA?
+### 2.2 How to create your first SDA?
     1) Download code then extract files.  
     2) Double click SecondDesktop.sln.  
     3) File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
@@ -66,5 +62,5 @@
 ```
 *Can refer to SecondDesktop/SecondDesktop/AppDemo.  
 
-### 2.3.Roadmap
+### 2.3 Roadmap
 
