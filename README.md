@@ -21,15 +21,15 @@
 #### 1.4.2 Install App  
     1) Click AppStore on the App Area.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png"/>
+    
     2) Click "Install" button to install app you want.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png"/>
+    
 #### 1.4.3 Install SubApp  
-    1) Select Desktop page that you want to install.
+    1) Select Desktop page that you want to install.  
     2) Click App you want to install.  
     3) Settings then install SubApp, you can see SubApp in the selected Desktop.  
-
 ----
-
 ## 2 Delevoper
 ### 2.1 Definitions
     SD -- Second Desktop  
