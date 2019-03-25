@@ -1,5 +1,6 @@
 # SECOND DESKTOP
-
+----
+# USER
 &ensp;The Second Desktop is a toolbox, it will make your work more comfortable.
 &ensp;The Windows Start Menu is a collection of application shortcuts, it is quick and also stupid.  
 &ensp;Maybe you have such a story on your body:  
@@ -16,6 +17,17 @@
 &ensp;&ensp;So i developed this tool,named "Second Desktop".  
 &ensp;&ensp;-If you want to edit Registry.  
 &ensp;&ensp;-If you want to open folder,just like c:/a/b/c/d.  
+
+
+### Configuring  
+1. Windows XP/7/vista/8/10.  
+2. .netframework 4.6 or above.  
+  
+### How To Use?  
+1. Download release version(Please download the new version).  
+2. Double click SecondDesktop.exe.  
+  
+
 ### Definitions
 ##### SD -- Second Desktop
 ##### SDA - Second Desktop App
@@ -27,12 +39,11 @@
 
 ### Features
 
-### How To Use?
 
 
-### Configuring
+----
+# Delevoper
 
-### Installation
 
 ### How to create your first SDA
 
