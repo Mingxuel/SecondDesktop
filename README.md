@@ -4,7 +4,7 @@
     Second Desktop is a toolbox, it will make your work more comfortable.  
     The Windows Start Menu is a collection of application shortcuts, it is quick and also stupid.  
     Second Desktop will meet your needs in the easiest way.  
-    ![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SecondDesktop.png)  
+![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SecondDesktop.png)  
   
 ### Features  
   
