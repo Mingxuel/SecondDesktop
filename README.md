@@ -40,7 +40,6 @@
     SDA -- Second Desktop App  
 
 ### How to create your first SDA?
-    *Can refer to SecondDesktop/SecondDesktop/AppDemo.  
     1) Download code then extract files.  
     2) Double click SecondDesktop.sln.  
     3) File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
@@ -56,7 +55,6 @@
         -Factory::AppName  
         -Factory::CreateWindow  
     10) Create a button from MainWindow and add click event, you can create SubApp config file, create SubApp, the parameter is config file.  e.g like below:  
-    
 ```csharp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -66,6 +64,7 @@
             Factory.CreateSubApp(AppUID.SubApp, config);
         }
 ```
+*Can refer to SecondDesktop/SecondDesktop/AppDemo.  
 
 ### Roadmap
 
