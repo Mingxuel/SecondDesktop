@@ -1,11 +1,12 @@
 # SECOND DESKTOP
 
-## User  
+## User
+### Introduction
     Second Desktop is a toolbox, it will make your work more comfortable.  
     The Windows Start Menu is a collection of application shortcuts, it is quick and also stupid.  
     Second Desktop will meet your needs in the easiest way.  
 ![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SecondDesktop.png)  
-  
+
 ### Features  
   
   
@@ -22,11 +23,6 @@
 ### Definitions
     SD -- Second Desktop  
     SDA -- Second Desktop App  
-
-### Why everyone need SD?
-###### 1
-###### 2
-###### 3
 
 ### How to create your first SDA
 
