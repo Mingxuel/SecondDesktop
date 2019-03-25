@@ -12,20 +12,20 @@
 ### Configuring
     1. Windows XP/7/vista/8/10.  
     2. .netframework 4.6 or above.  
-### How To Use
-#### Start
-    1. Download release version(Please download the new version).  
-    2. Double click SecondDesktop.exe.  
-#### Install App
-    1. Click AppStore on the App Area.  
+### HOW TO USE
+#### 1.Start
+    1) Download release version(Please download the new version).  
+    2) Double click SecondDesktop.exe.  
+#### 2.Install App
+    1) Click AppStore on the App Area.  
 ![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png)
     
-    2. Click "Install" button to install app you want.  
+    2) Click "Install" button to install app you want.  
 ![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png)  
-#### Install SubApp
-    1. Select Desktop page that you want to install.
-    2. Click App you want to install.  
-    3. Settings then install SubApp, you can see SubApp in the selected Desktop.
+#### 3.Install SubApp
+    1) Select Desktop page that you want to install.
+    2) Click App you want to install.  
+    3) Settings then install SubApp, you can see SubApp in the selected Desktop.
 ----
 ## Delevoper
 ### Definitions
@@ -33,6 +33,29 @@
     SDA -- Second Desktop App  
 
 ### How to create your first SDA?
+    *Can refer to SecondDesktop/SecondDesktop/AppDemo.  
+    1) Download code then extract files.  
+    2) Double click SecondDesktop.sln.  
+    3) File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
+    4) Ready your project image, size is 36x36, type is png, name is your App name, then add the image to the project root directory.  
+    5) Right mouse click on the project->Properties->Build Events->Post-build event command line, add command in the textbox like below:  
+    6) Right mouse click on the project->Add->New Item->User Control(WPF), rename to 'MainWindow'.  
+    7) Right mouse click on the project->Add->New Item->User Control(WPF), rename to you want(this is your SubApp Window).  
+    8) Add SecondDesktop/SecondDesktop/AppDemo/Factory.cs to the project.  
+    9) Open Factory.cs, and modify something like below(I believe you are smart enough):  
+        -enum AppUID  
+        -Factory::AppName  
+        -Factory::CreateWindow  
+    10) Create a button from MainWindow and add click event, you can create SubApp config file, create SubApp, the parameter is config file.  e.g like below:  
 
+```
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string config = Factory.CreateSubAppConfig();
+            SubAppConfigManager manager = new SubAppConfigManager(config);
+            manager.SetText(Message.Text);
+            Factory.CreateSubApp(AppUID.SubApp, config);
+        }
+```
 ### Roadmap
 
