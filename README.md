@@ -18,15 +18,17 @@
     2) Double click SecondDesktop.exe.  
 #### 2.Install App
     1) Click AppStore on the App Area.  
-![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png)
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png"/>
     
     2) Click "Install" button to install app you want.  
-![SecondDesktop](https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png)  
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png"/>
 #### 3.Install SubApp
     1) Select Desktop page that you want to install.
     2) Click App you want to install.  
     3) Settings then install SubApp, you can see SubApp in the selected Desktop.
+
 ----
+
 ## Delevoper
 ### Definitions
     SD -- Second Desktop  
