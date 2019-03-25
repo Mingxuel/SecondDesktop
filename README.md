@@ -39,18 +39,23 @@
     1) Download code then extract files.  
     2) Double click SecondDesktop.sln.  
     3) File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
-    4) Ready your project image, size is 36x36, type is png, name is your App name, then add the image to the project root directory.  
-    5) Right mouse click on the project->Properties->Build Events->Post-build event command line, add command in the textbox like below:  
+    4) Ready your project image, size is 36x36, type is png, name is your App name, then add the  
+    image to the project root directory.  
+    5) Right mouse click on the project->Properties->Build Events->Post-build event command line,  
+    add command in the textbox like below:  
         xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"  
         xcopy /Y "$(TargetDir)*" "$(APPDATA)\$(SolutionName)\Apps\$(TargetName)\"  
     6) Right mouse click on the project->Add->New Item->User Control(WPF), rename to 'MainWindow'.  
-    7) Right mouse click on the project->Add->New Item->User Control(WPF), rename to you want(this is your SubApp Window).  
+    7) Right mouse click on the project->Add->New Item->User Control(WPF), rename to you want(this  
+    is your SubApp Window).  
     8) Add SecondDesktop/SecondDesktop/AppDemo/Factory.cs to the project.  
     9) Open Factory.cs, and modify something like below(I believe you are smart enough):  
         -enum AppUID  
         -Factory::AppName  
         -Factory::CreateWindow  
-    10) Create a button from MainWindow and add click event, you can create SubApp config file, create SubApp, the parameter is config file.  e.g like below:  
+    10) Create a button from MainWindow and add click event, you can create SubApp config file,  
+    create SubApp, the parameter is config file.  
+        e.g like below:  
 ```csharp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
