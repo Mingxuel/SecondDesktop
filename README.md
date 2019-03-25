@@ -12,20 +12,24 @@
 ### Configuring
     1. Windows XP/7/vista/8/10.  
     2. .netframework 4.6 or above.  
+    
 ### HOW TO USE
+    
 #### 1.Start
     1) Download release version(Please download the new version).  
     2) Double click SecondDesktop.exe.  
-#### 2.Install App
+    
+#### 2.Install App  
     1) Click AppStore on the App Area.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStore.png"/>
     
     2) Click "Install" button to install app you want.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AppStoreMainWindow.png"/>
-#### 3.Install SubApp
+  
+#### 3.Install SubApp  
     1) Select Desktop page that you want to install.
     2) Click App you want to install.  
-    3) Settings then install SubApp, you can see SubApp in the selected Desktop.
+    3) Settings then install SubApp, you can see SubApp in the selected Desktop.  
 
 ----
 
@@ -41,6 +45,8 @@
     3) File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
     4) Ready your project image, size is 36x36, type is png, name is your App name, then add the image to the project root directory.  
     5) Right mouse click on the project->Properties->Build Events->Post-build event command line, add command in the textbox like below:  
+        xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"  
+        xcopy /Y "$(TargetDir)*" "$(APPDATA)\$(SolutionName)\Apps\$(TargetName)\"  
     6) Right mouse click on the project->Add->New Item->User Control(WPF), rename to 'MainWindow'.  
     7) Right mouse click on the project->Add->New Item->User Control(WPF), rename to you want(this is your SubApp Window).  
     8) Add SecondDesktop/SecondDesktop/AppDemo/Factory.cs to the project.  
