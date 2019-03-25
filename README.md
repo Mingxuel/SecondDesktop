@@ -49,6 +49,7 @@
         -Factory::AppName  
         -Factory::CreateWindow  
     10) Create a button from MainWindow and add click event, you can create SubApp config file, create SubApp, the parameter is config file.  e.g like below:  
+    
 ```csharp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
