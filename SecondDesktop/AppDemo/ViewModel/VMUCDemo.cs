@@ -15,7 +15,6 @@ namespace AppDemo
         public VMUCDemo()
         {
             Model = new MUCDemo();
-            //Title = "Hello Snoopy";
         }
     }
 }

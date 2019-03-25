@@ -5,23 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SecondDesktopMessagerDll;
 
 namespace AppDemo
 {
     /// <summary>
     /// Interaction logic for SubApp.xaml
     /// </summary>
-    public partial class SubApp : UserControl
+    public partial class AppWindow : UserControl
     {
-        public SubApp(string Config)
+        public AppWindow(string Config)
         {
             InitializeComponent();
             SubAppConfigManager manager = new SubAppConfigManager(Config);

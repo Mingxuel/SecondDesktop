@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace AppDemo
 {
-    public class SubAppConfigManager
+	/// <summary>
+	/// class name: SubAppConfigManager
+	/// Congig manager
+	/// </summary>
+	public class SubAppConfigManager
     {
         private string ConfigPath = "";
         private SubAppData data = new SubAppData();
