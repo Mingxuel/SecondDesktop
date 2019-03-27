@@ -92,5 +92,20 @@ namespace SecondDesktopAppStore
 				return activeCommand;
 			}
 		}
+
+		private SDCommand<string> importCommand;
+		public SDCommand<string> ImportCommand
+		{
+			get
+			{
+				if (importCommand == null)
+					importCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+
+						}), null);
+				return importCommand;
+			}
+		}
 	}
 }

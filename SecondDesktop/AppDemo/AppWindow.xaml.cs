@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using SecondDesktopHotkeyManagerDll;
 
 namespace AppDemo
 {
@@ -17,12 +14,22 @@ namespace AppDemo
         {
             InitializeComponent();
             SubAppConfigManager manager = new SubAppConfigManager(Config);
-            test.Content = manager.GetText();
+            test.Text = manager.GetText();
         }
+
+        [DllImport("kernel32.dll")]
+        public static extern uint GetLastError();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Height = 500;
+			HotkeyManager.GetInstance().RegisterHotKey("Test", LKey.Ctrl, RKey.D0, HotKey);
+        }
+
+        private int HotKey()
+        {
+            MessageBox.Show("Yes");
+
+            return 0;
         }
     }
 }

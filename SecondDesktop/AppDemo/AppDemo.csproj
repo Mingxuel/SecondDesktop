@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AppDemo</RootNamespace>
     <AssemblyName>AppDemo</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +32,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -74,6 +81,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SecondDesktopHotkeyManagerDll\SecondDesktopHotkeyManagerDll.csproj">
+      <Project>{abd9aafb-0bf2-48db-ab2c-7a3b263fe613}</Project>
+      <Name>SecondDesktopHotkeyManagerDll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SecondDesktopMessagerDll\SecondDesktopMessagerDll.csproj">
       <Project>{95800c3a-d7c2-4bff-b89f-31f0a5cc302b}</Project>
       <Name>SecondDesktopMessagerDll</Name>
@@ -84,11 +95,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"
+</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"
-xcopy /Y "$(TargetDir)*" "$(APPDATA)\$(SolutionName)\Apps\$(TargetName)\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)*" "$(APPDATA)\$(SolutionName)\Apps\$(TargetName)\"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

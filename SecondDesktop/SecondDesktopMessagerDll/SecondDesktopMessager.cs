@@ -40,7 +40,10 @@ namespace SecondDesktopMessagerDll
 
         public void DesktopSettings(bool IsSetting)
         {
-            DesktopSettingsNotify(IsSetting);
+            if(DesktopSettingsNotify != null)
+            {
+                DesktopSettingsNotify(IsSetting);
+            }
         }
     }
 }

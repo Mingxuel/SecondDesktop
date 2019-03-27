@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SecondDesktopDesktopManagerDll
 {
-    public class DesktopManager
+    public class DesktopDataManager
     {
         public delegate void UpdateDelegate();
         public event UpdateDelegate Update;
@@ -50,8 +50,8 @@ namespace SecondDesktopDesktopManagerDll
         }
 
         private static string ConfigPath = "";
-        private static DesktopManager desktopManager = null;
-        public static DesktopManager GetInstance()
+        private static DesktopDataManager desktopManager = null;
+        public static DesktopDataManager GetInstance()
         {
             if (desktopManager == null)
             {
@@ -75,8 +75,8 @@ namespace SecondDesktopDesktopManagerDll
             string json = File.ReadAllText(ConfigPath);
             json = MD5.Decrypt(json);
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            DataContractJsonSerializer deseralizer = new DataContractJsonSerializer(typeof(DesktopManager));
-            desktopManager = (DesktopManager)deseralizer.ReadObject(ms);
+            DataContractJsonSerializer deseralizer = new DataContractJsonSerializer(typeof(DesktopDataManager));
+            desktopManager = (DesktopDataManager)deseralizer.ReadObject(ms);
             SecondDesktopMessager.GetInstance().CreateSubAppConfigNotify += desktopManager.CreateSubAppConfig;
 
             if(desktopManager.PageList.Count() == 0)
@@ -140,14 +140,19 @@ namespace SecondDesktopDesktopManagerDll
                 }
 
                 PageList.Remove(page);
-                foreach (var i in PageList)
+                Dictionary<int, string> tempList = new Dictionary<int, string>();
+                for (int i = 0; i < PageList.Count(); i++)
                 {
-                    if(i.Key >= page)
+                    if (PageList.ElementAt(i).Key > page)
                     {
-                        string title = i.Value;
-                        PageList.Remove(i.Key);
-                        PageList.Add(page - 1, title);
+                        tempList.Add(PageList.ElementAt(i).Key - 1, PageList.ElementAt(i).Value);
+                        PageList.Remove(PageList.ElementAt(i).Key);
+                        i--;
                     }
+                }
+                foreach (var item in tempList)
+                {
+                    PageList.Add(item.Key, item.Value);
                 }
             }
 
@@ -162,7 +167,6 @@ namespace SecondDesktopDesktopManagerDll
 
         public void DeletePage(int Page)
         {
-            PageList.Remove(Page);
             for(int i = 0; i<DesktopItemList.Count; i++)
             {
                 if(DesktopItemList.ElementAt(i).Page == Page)
@@ -170,6 +174,22 @@ namespace SecondDesktopDesktopManagerDll
                     DesktopItemList.RemoveAt(i);
                     i--;
                 }
+            }
+
+            PageList.Remove(Page);
+            Dictionary<int, string> tempList = new Dictionary<int, string>();
+            for(int i = 0; i< PageList.Count(); i++)
+            {
+                if (PageList.ElementAt(i).Key > Page)
+                {
+                    tempList.Add(PageList.ElementAt(i).Key - 1, PageList.ElementAt(i).Value);
+                    PageList.Remove(PageList.ElementAt(i).Key);
+                    i--;
+                }
+            }
+            foreach(var item in tempList)
+            {
+                PageList.Add(item.Key, item.Value);
             }
 
             SaveSubApp();
@@ -183,9 +203,9 @@ namespace SecondDesktopDesktopManagerDll
 
         public void SaveSubApp()
         {
-            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopManager));
+            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopDataManager));
             MemoryStream memoryStream = new MemoryStream();
-            js.WriteObject(memoryStream, DesktopManager.GetInstance());
+            js.WriteObject(memoryStream, DesktopDataManager.GetInstance());
             memoryStream.Position = 0;
             StreamReader streamReader = new StreamReader(memoryStream, Encoding.UTF8);
             string json = streamReader.ReadToEnd();

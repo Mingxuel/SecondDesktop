@@ -84,16 +84,11 @@
     <Compile Include="Class\SubDesktop.cs" />
     <Compile Include="Class\SubDesktopItem.cs" />
     <Compile Include="Model\MMain.cs" />
-    <Compile Include="Model\MSubAppFrame.cs" />
     <Compile Include="ViewModel\VMAppPanelFrame.cs" />
     <Compile Include="ViewModel\VMMain.cs" />
     <Compile Include="Model\MAppPanelFrame.cs" />
-    <Compile Include="ViewModel\VMSubAppFrame.cs" />
     <Compile Include="View\AppPanelFrame.xaml.cs">
       <DependentUpon>AppPanelFrame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SubAppFrame.xaml.cs">
-      <DependentUpon>SubAppFrame.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,10 +103,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AppPanelFrame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SubAppFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

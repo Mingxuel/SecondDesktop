@@ -1,5 +1,4 @@
-﻿using SecondDesktopDesktopManagerDll;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SecondDesktop
+namespace SecondDesktopDesktopManagerDll
 {
     /// <summary>
     /// Interaction logic for SubAppFrame.xaml
@@ -40,7 +39,7 @@ namespace SecondDesktop
         private void CloseWindow()
         {
             ((WrapPanel)this.Parent).Children.Remove(this);
-            DesktopManager.GetInstance().DeleteSubApp(DI);
+            DesktopDataManager.GetInstance().DeleteSubApp(DI);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using SecondDesktopAppManagerDll;
-using SecondDesktopDesktopManagerDll;
 using SecondDesktopDll;
 using SecondDesktopMessagerDll;
 using System;
@@ -9,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SecondDesktop
+namespace SecondDesktopDesktopManagerDll
 {
     class VMSubAppFrame : NotifyObject
-	{
+    {
         public delegate void CloseDelegate();
         public event CloseDelegate CloseNotify;
 
@@ -23,9 +22,9 @@ namespace SecondDesktop
             Model = new MSubAppFrame();
             Item = pItem;
 
-            foreach(var i in AppManager.GetInstance().AppItemList)
+            foreach (var i in AppManager.GetInstance().AppItemList)
             {
-                if(i.AppUID == pItem.AppUID)
+                if (i.AppUID == pItem.AppUID)
                 {
                     AppImage = i.Icon;
                     AppTitle = i.Name;
@@ -46,8 +45,8 @@ namespace SecondDesktop
             get { return Model.Width; }
             set
             {
-				Model.Width = value;
-				RaisePropertyChanged("Width");
+                Model.Width = value;
+                RaisePropertyChanged("Width");
             }
         }
 
@@ -56,8 +55,8 @@ namespace SecondDesktop
             get { return Model.Height; }
             set
             {
-				Model.Height = value;
-				RaisePropertyChanged("Height");
+                Model.Height = value;
+                RaisePropertyChanged("Height");
             }
         }
 
@@ -191,18 +190,18 @@ namespace SecondDesktop
                         new Action<string>(e =>
                         {
                             int preIndex = -1;
-                            for (int i = 0; i < DesktopManager.GetInstance().DesktopItemList.Count; i++)
+                            for (int i = 0; i < DesktopDataManager.GetInstance().DesktopItemList.Count; i++)
                             {
-                                if (DesktopManager.GetInstance().DesktopItemList.ElementAt(i).Page == Item.Page)
+                                if (DesktopDataManager.GetInstance().DesktopItemList.ElementAt(i).Page == Item.Page)
                                 {
-                                    if(DesktopManager.GetInstance().DesktopItemList[i].Config == Item.Config)
+                                    if (DesktopDataManager.GetInstance().DesktopItemList[i].Config == Item.Config)
                                     {
                                         if (preIndex == -1) break;
 
-                                        DesktopItem temp = DesktopManager.GetInstance().DesktopItemList[i];
-                                        DesktopManager.GetInstance().DesktopItemList[i] = DesktopManager.GetInstance().DesktopItemList[preIndex];
-                                        DesktopManager.GetInstance().DesktopItemList[preIndex] = temp;
-                                        DesktopManager.GetInstance().SaveSubApp();
+                                        DesktopItem temp = DesktopDataManager.GetInstance().DesktopItemList[i];
+                                        DesktopDataManager.GetInstance().DesktopItemList[i] = DesktopDataManager.GetInstance().DesktopItemList[preIndex];
+                                        DesktopDataManager.GetInstance().DesktopItemList[preIndex] = temp;
+                                        DesktopDataManager.GetInstance().SaveSubApp();
                                         break;
                                     }
                                     else
@@ -226,18 +225,18 @@ namespace SecondDesktop
                         new Action<string>(e =>
                         {
                             int nextIndex = -1;
-                            for (int i = DesktopManager.GetInstance().DesktopItemList.Count-1; i > -1; i--)
+                            for (int i = DesktopDataManager.GetInstance().DesktopItemList.Count - 1; i > -1; i--)
                             {
-                                if (DesktopManager.GetInstance().DesktopItemList.ElementAt(i).Page == Item.Page)
+                                if (DesktopDataManager.GetInstance().DesktopItemList.ElementAt(i).Page == Item.Page)
                                 {
-                                    if (DesktopManager.GetInstance().DesktopItemList[i].Config == Item.Config)
+                                    if (DesktopDataManager.GetInstance().DesktopItemList[i].Config == Item.Config)
                                     {
                                         if (nextIndex == -1) continue;
 
-                                        DesktopItem temp = DesktopManager.GetInstance().DesktopItemList[i];
-                                        DesktopManager.GetInstance().DesktopItemList[i] = DesktopManager.GetInstance().DesktopItemList[nextIndex];
-                                        DesktopManager.GetInstance().DesktopItemList[nextIndex] = temp;
-                                        DesktopManager.GetInstance().SaveSubApp();
+                                        DesktopItem temp = DesktopDataManager.GetInstance().DesktopItemList[i];
+                                        DesktopDataManager.GetInstance().DesktopItemList[i] = DesktopDataManager.GetInstance().DesktopItemList[nextIndex];
+                                        DesktopDataManager.GetInstance().DesktopItemList[nextIndex] = temp;
+                                        DesktopDataManager.GetInstance().SaveSubApp();
                                         break;
                                     }
                                     else
@@ -260,14 +259,14 @@ namespace SecondDesktop
                     moveLeftClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            foreach (var item in DesktopManager.GetInstance().DesktopItemList)
+                            foreach (var item in DesktopDataManager.GetInstance().DesktopItemList)
                             {
                                 if (item.Config == Item.Config)
                                 {
                                     if (item.Page != 0)
                                     {
                                         item.Page--;
-                                        DesktopManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().SaveSubApp();
                                         break;
                                     }
                                 }
@@ -286,14 +285,14 @@ namespace SecondDesktop
                     moveRightClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            foreach(var item in DesktopManager.GetInstance().DesktopItemList)
+                            foreach (var item in DesktopDataManager.GetInstance().DesktopItemList)
                             {
-                                if(item.Config == Item.Config)
+                                if (item.Config == Item.Config)
                                 {
-                                    if(item.Page != (DesktopManager.GetInstance().PageList.Count -1))
+                                    if (item.Page != (DesktopDataManager.GetInstance().PageList.Count - 1))
                                     {
                                         item.Page++;
-                                        DesktopManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().SaveSubApp();
                                         break;
                                     }
                                 }
@@ -320,7 +319,7 @@ namespace SecondDesktop
 
         private void DesktopSettings(bool pIsSettings)
         {
-            if(pIsSettings)
+            if (pIsSettings)
             {
                 MoveUpVisibility = Visibility.Visible;
                 MoveDownVisibility = Visibility.Visible;

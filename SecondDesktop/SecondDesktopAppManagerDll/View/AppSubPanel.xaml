@@ -7,9 +7,6 @@
              xmlns:local="clr-namespace:SecondDesktopAppManagerDll"
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
              mc:Ignorable="d" Height="144">
-    <UserControl.Resources>
-        <BitmapImage UriSource="pack://siteoforigin:,,,/Resource/App/Delete.png" x:Key="DeleteImage"/>
-    </UserControl.Resources>
     <WrapPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -106,7 +103,7 @@
                             </Button>
                             <Button Grid.Row="0" Grid.Column="1" Background="#FFCA5100" Width="13" Height="13" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-6, -6, 0" Visibility="{Binding DataContext.DeleteVisibility, ElementName=ICApp, Mode=TwoWay}">
                                 <Button.Content>
-                                    <Image Source="{StaticResource ResourceKey=DeleteImage}" Stretch="Fill"/>
+                                    <Image Source="pack://SiteOfOrigin:,,,/Resource/App/Delete.png" Stretch="Fill"/>
                                 </Button.Content>
                                 <Button.Style>
                                     <Style TargetType="Button">
