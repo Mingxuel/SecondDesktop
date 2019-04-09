@@ -16,6 +16,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,7 +28,6 @@ namespace SecondDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool IsShow = true;
         VMMain ViewModel = null;
         public MainWindow()
         {
@@ -72,24 +72,8 @@ namespace SecondDesktop
             wpAppPanel.Children.Clear();
             ((VMMain)this.DataContext).AppMainWindowVisibility = Visibility.Hidden;
         }
-
-        private int ShowWindow()
-        {
-            if (!IsShow)
-            {
-                IsShow = true;
-                Show();
-            }
-            else
-            {
-                IsShow = false;
-                Hide();
-            }
-
-            return 0;
-        }
-
-		private void Window_LostFocus(object sender, RoutedEventArgs e)
+ 
+        private void Window_LostFocus(object sender, RoutedEventArgs e)
 		{
 			Topmost = true;
 		}

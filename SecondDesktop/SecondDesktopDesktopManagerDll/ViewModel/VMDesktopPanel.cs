@@ -286,12 +286,22 @@ namespace SecondDesktopDesktopManagerDll
                     deleteClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            DesktopDataManager.GetInstance().DeletePage(CurrentPage);
-                            CurrentPage = 0;
-                            Update();
+                            SecondDesktopMessager.GetInstance().ShowMessageBox("Are you sure to delete this Desktop Page?", CloseDesktop);
                         }), null);
                 return deleteClickCommand;
             }
+        }
+
+        private int CloseDesktop(bool pStatus)
+        {
+            if(pStatus)
+            {
+                DesktopDataManager.GetInstance().DeletePage(CurrentPage);
+                CurrentPage = 0;
+                Update();
+            }
+
+            return 0;
         }
 
 

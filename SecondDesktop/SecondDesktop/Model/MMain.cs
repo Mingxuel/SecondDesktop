@@ -26,5 +26,8 @@ namespace SecondDesktop
         public string AppIcon;
         public string AppTitle;
         public string AppCloseImage;
+
+        public Visibility MessageBoxVisibility;
+        public string MessageBoxMessage;
     }
 }

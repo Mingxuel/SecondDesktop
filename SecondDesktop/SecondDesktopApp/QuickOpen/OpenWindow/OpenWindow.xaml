@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="QuickOpen.OpenWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
+             xmlns:local="clr-namespace:QuickOpen"
+             mc:Ignorable="d" 
+             Width="344" Height="125">
+    <Grid>
+        <ItemsControl x:Name="ICPage" ItemsSource="{Binding OpenDataItems, Mode=TwoWay}" VerticalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="64"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="196"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="64"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Text="{Binding Title, Mode=TwoWay}"/>
+                        <TextBox Grid.Column="3" Text="{Binding Path, Mode=TwoWay}"/>
+                        <Button Grid.Column="5" Content="Open"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

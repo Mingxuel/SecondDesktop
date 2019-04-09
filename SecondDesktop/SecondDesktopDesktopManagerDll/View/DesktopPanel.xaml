@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SecondDesktopDesktopManagerDll"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="344">
     <Grid>
@@ -16,7 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="White" BorderThickness="0" Background="#2D2D2D">
+        <Border Grid.Row="0" BorderBrush="White" BorderThickness="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
@@ -25,137 +27,32 @@
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="16"/>
-                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="16"/>
-                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="16"/>
                     <ColumnDefinition Width="3"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="{Binding DesktopImage, Mode=TwoWay}" Stretch="Fill"/>
-                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Foreground="White" Background="{Binding DesktopTitleBackground, Mode=TwoWay}" BorderThickness="0" Width="200" VerticalAlignment="Center" IsReadOnly="{Binding DesktopTitleReadOnly, Mode=TwoWay}" CaretBrush="#2D2D2D" />
-                <Button Grid.Column="5" Background="Transparent" Width="16" Height="16">
-                    <Button.Content>
-                        <Image Source="{Binding DesktopSettingImage, Mode=TwoWay}" Stretch="Fill"/>
-                    </Button.Content>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" >
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="Button.MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Button.MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:SDEventCommand Command="{Binding SettingsClickCommand}" CommandParameter=""/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                <materialDesign:PackIcon Grid.Column="1" Kind="DesktopWindows" Width="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center" IsReadOnly="{Binding DesktopTitleReadOnly, Mode=TwoWay}" BorderThickness="0"/>
+                <Button Grid.Column="5" Command="{Binding SettingsClickCommand}"
+                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
+                    <materialDesign:PackIcon Kind="Settings" Width="12"/>
                 </Button>
-                <Button Grid.Column="7" Background="Transparent" Width="16" Height="16">
-                    <Button.Content>
-                        <Image Source="{Binding DesktopAddImage, Mode=TwoWay}" Stretch="Fill"/>
-                    </Button.Content>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" >
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="Button.MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Button.MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:SDEventCommand Command="{Binding AddClickCommand}" CommandParameter=""/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                <Button Grid.Column="7" Command="{Binding AddClickCommand}"
+                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
+                    <materialDesign:PackIcon Kind="Add" Width="16"/>
                 </Button>
-                <Button Grid.Column="9" Background="Transparent" Width="16" Height="16">
-                    <Button.Content>
-                        <Image Source="{Binding DesktopDeleteImage, Mode=TwoWay}" Stretch="Fill"/>
-                    </Button.Content>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" >
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="Button.MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="Button.MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:SDEventCommand Command="{Binding DeleteClickCommand}" CommandParameter=""/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                <Button Grid.Column="9" Command="{Binding DeleteClickCommand}"
+                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
+                    <materialDesign:PackIcon Kind="Delete" Width="12"/>
                 </Button>
             </Grid>
         </Border>
-        <ScrollViewer Name="svDesktop" Grid.Row="1" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1" Background="#3D3D3D">
+        <ScrollViewer Name="svDesktop" Grid.Row="1" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1">
             <WrapPanel Name="wpDesktop"/>
         </ScrollViewer>
-        <Grid Grid.Row="2" Background="#3D3D3D">
+        <Grid Grid.Row="2">
             <ItemsControl x:Name="ICPage" ItemsSource="{Binding DesktopPageItems, Mode=TwoWay}" VerticalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

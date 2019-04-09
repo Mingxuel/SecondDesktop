@@ -17,6 +17,9 @@ namespace SecondDesktopMessagerDll
         public delegate void DesktopSettingsDelegate(bool IsSetting);
         public event DesktopSettingsDelegate DesktopSettingsNotify;
 
+        public delegate void ShowMessageBoxDelegate(string pMessage, Func<bool, int> pReturn);
+        public event ShowMessageBoxDelegate ShowMessageBoxNotify;
+
         private static SecondDesktopMessager secondDesktopMessager = null;
         public static SecondDesktopMessager GetInstance()
         {
@@ -43,6 +46,14 @@ namespace SecondDesktopMessagerDll
             if(DesktopSettingsNotify != null)
             {
                 DesktopSettingsNotify(IsSetting);
+            }
+        }
+
+        public void ShowMessageBox(string pMessage, Func<bool, int> Return)
+        {
+            if (ShowMessageBoxNotify != null)
+            {
+                ShowMessageBoxNotify(pMessage, Return);
             }
         }
     }

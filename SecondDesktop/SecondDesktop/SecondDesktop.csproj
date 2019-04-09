@@ -53,8 +53,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.1.0.12\lib\net45\ShowMeTheXAML.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,8 +96,12 @@
     <Compile Include="ViewModel\VMAppPanelFrame.cs" />
     <Compile Include="ViewModel\VMMain.cs" />
     <Compile Include="Model\MAppPanelFrame.cs" />
+    <Compile Include="ViewModel\VMMessageBoxYesNo.cs" />
     <Compile Include="View\AppPanelFrame.xaml.cs">
       <DependentUpon>AppPanelFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MessageBoxYesNo.xaml.cs">
+      <DependentUpon>MessageBoxYesNo.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +116,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AppPanelFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MessageBoxYesNo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +189,12 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I /E  "$(SolutionDir)Resource\*.*" "$(TargetDir)Resource"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /E "$(SolutionDir)Resource\*" "$(ProjectDir)$(OutDir)Resource\"
+xcopy /Y /E "$(SolutionDir)Resource\*" "$(SolutionDir)$(OutDir)Resource\"
+xcopy /Y "$(TargetDir)*.exe" "$(SolutionDir)$(OutDir)"
+xcopy /Y "$(TargetDir)*.dll" "$(SolutionDir)$(OutDir)"
+
+
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

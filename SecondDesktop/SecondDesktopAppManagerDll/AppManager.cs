@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -83,12 +84,63 @@ namespace SecondDesktopAppManagerDll
             DataContractJsonSerializer deseralizer = new DataContractJsonSerializer(typeof(AppManager));
 			appManager = (AppManager)deseralizer.ReadObject(ms);
 
-			appManager.InitAppStore();
+			appManager.InitApps();
         }
 
-		private void InitAppStore()
+		private void InitApps()
 		{
-			if(!ExistsApp("SecondDesktopAppStore"))
+            Dictionary<string, Version> storeAppList = new Dictionary<string, Version>();
+            string storeDirectory = ConfigManager.GetInstance().ApplicationStoreDirectory;
+            if (!Directory.Exists(storeDirectory))
+            {
+                Directory.CreateDirectory(storeDirectory);
+            }
+            string[] tempList = Directory.GetFileSystemEntries(storeDirectory);
+            for(int i = 0; i < tempList.Count(); i++)
+            {
+                string app = tempList[i].Substring(tempList[i].LastIndexOf("\\")+1);
+                Version version = AssemblyName.GetAssemblyName(tempList[i]+ "\\" + app +".dll").Version;
+                storeAppList.Add(app, version);
+            }
+
+            Dictionary<string, Version> dataAppList = new Dictionary<string, Version>();
+            string dataDirectory = ConfigManager.GetInstance().ApplicationAppsDirectory;
+            if (!Directory.Exists(dataDirectory))
+            {
+                Directory.CreateDirectory(dataDirectory);
+            }
+            tempList = Directory.GetFileSystemEntries(dataDirectory);
+            for (int i = 0; i < tempList.Count(); i++)
+            {
+                string app = tempList[i].Substring(tempList[i].LastIndexOf("\\") + 1);
+                Version version = AssemblyName.GetAssemblyName(tempList[i] + "\\" + app + ".dll").Version;
+                dataAppList.Add(app, version);
+            }
+
+            foreach(var storeApp in storeAppList)
+            {
+                bool cover = true;
+                foreach(var dataApp in dataAppList)
+                {
+                    if(storeApp.Key == dataApp.Key && storeApp.Value <= dataApp.Value)
+                    {
+                        cover = false;
+                        break;
+                    }
+                }
+
+                if (cover)
+                {
+                    if(Directory.Exists(dataDirectory + storeApp.Key))
+                    {
+                        Directory.Delete(dataDirectory + storeApp.Key, true);
+                    }
+                    CopyDirectory(storeDirectory + storeApp.Key, dataDirectory + storeApp.Key);
+                }
+            }
+
+            //Add appstore
+            if (!ExistsApp("SecondDesktopAppStore"))
 			{
 				string path = ConfigManager.GetInstance().ApplicationDirectory + "SecondDesktopAppStore";
 				AddApp(path);

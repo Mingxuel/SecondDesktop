@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{748660AB-29AC-493D-88D7-D3DF6408DF84}</ProjectGuid>
+    <ProjectGuid>{088B85AA-D42C-4EE9-AB60-9E082B8E282C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SecondDesktopDll</RootNamespace>
-    <AssemblyName>SecondDesktopDll</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>SecondDesktopAppStore</RootNamespace>
+    <AssemblyName>SecondDesktopAppStore</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\SecondDesktop\bin\Debug\</OutputPath>
+    <OutputPath>bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,10 +26,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>bin\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -53,34 +56,53 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigManager.cs" />
-    <Compile Include="ConfirmMsgArgs.cs" />
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="DialogMsgArgs.cs" />
-    <Compile Include="DispatcherHelper.cs" />
-    <Compile Include="IMessageManager.cs" />
-    <Compile Include="IMessageRegister.cs" />
-    <Compile Include="MessageManager.cs" />
-    <Compile Include="MessageRegisterBase.cs" />
-    <Compile Include="ModelBase.cs" />
-    <Compile Include="MsgActionInfo.cs" />
-    <Compile Include="MsgActionInfoGeneric.cs" />
-    <Compile Include="MsgArgs.cs" />
-    <Compile Include="NotifyObject.cs" />
-    <Compile Include="NotifyPropertyChanged.cs" />
+    <Compile Include="AppStoreItem.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Model\MMainWindow.cs" />
+    <Compile Include="ViewModel\VMMainWindow.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="RSACrypt.cs" />
-    <Compile Include="SDCommand.cs" />
-    <Compile Include="SDCommandGeneric.cs" />
-    <Compile Include="SDEventCommand.cs" />
-    <Compile Include="SDMessageManager.cs" />
-    <Compile Include="SDResource.cs" />
-    <Compile Include="SDSystem.cs" />
-    <Compile Include="StringArgs.cs" />
-    <Compile Include="ViewModelBase.cs" />
-    <Compile Include="ViewModelInfo.cs" />
-    <Compile Include="ViewModelManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SecondDesktopAppManagerDll\SecondDesktopAppManagerDll.csproj">
+      <Project>{fe149172-c8ae-44a6-a8fd-ca1250d3ecd2}</Project>
+      <Name>SecondDesktopAppManagerDll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SecondDesktopDll\SecondDesktopDll.csproj">
+      <Project>{748660ab-29ac-493d-88d7-d3df6408df84}</Project>
+      <Name>SecondDesktopDll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SecondDesktopMessagerDll\SecondDesktopMessagerDll.csproj">
+      <Project>{95800c3a-d7c2-4bff-b89f-31f0a5cc302b}</Project>
+      <Name>SecondDesktopMessagerDll</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppStore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)*.png" "$(SolutionDir)$(OutDir)Apps\$(ProjectName)\"
+xcopy /Y "$(TargetDir)*.dll" "$(SolutionDir)$(OutDir)Apps\$(ProjectName)\"
+xcopy /Y "$(TargetDir)*.png" "$(SolutionDir)$(SolutionName)\$(OutDir)Apps\$(ProjectName)\"
+xcopy /Y "$(TargetDir)*.dll" "$(SolutionDir)$(SolutionName)\$(OutDir)Apps\$(ProjectName)\"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"
+</PreBuildEvent>
+  </PropertyGroup>
 </Project>

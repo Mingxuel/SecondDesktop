@@ -73,5 +73,13 @@ namespace SecondDesktopDll
 				return System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 			}
 		}
-	}
+
+        public string ApplicationStoreDirectory
+        {
+            get
+            {
+                return ApplicationDirectory + "Apps\\";
+            }
+        }
+    }
 }
