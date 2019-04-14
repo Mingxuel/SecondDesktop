@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:SecondDesktopAppManagerDll"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
-             mc:Ignorable="d" Height="{Binding Height}" Background="#3D3D3D">
+             mc:Ignorable="d" Height="{Binding Height}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="144"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="White" BorderThickness="0" Background="#2D2D2D">
+        <Border Grid.Row="0" BorderBrush="White" BorderThickness="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
@@ -107,6 +107,6 @@
                 </Button>
             </Grid>
         </Border>
-        <local:AppSubPanel Grid.Row="1" Background="#3D3D3D"/>
+        <local:AppSubPanel Grid.Row="1"/>
     </Grid>
 </UserControl>

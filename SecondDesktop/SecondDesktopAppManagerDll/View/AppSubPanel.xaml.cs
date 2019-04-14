@@ -20,35 +20,12 @@ namespace SecondDesktopAppManagerDll
     /// </summary>
     public partial class AppSubPanel : UserControl
     {
-        public AppSubPanel()
+		VMAppSubPanel ViewModel = null;
+		public AppSubPanel()
         {
             InitializeComponent();
-            this.DataContext = new VMAppSubPanel();
-        }
-
-        private void Button_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Button_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void Button_MouseEnter(object sender, MouseEventArgs e)
-		{
-
+			ViewModel = new VMAppSubPanel();
+			this.DataContext = ViewModel;
 		}
 	}
 }

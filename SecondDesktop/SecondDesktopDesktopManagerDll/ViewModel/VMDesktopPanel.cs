@@ -26,7 +26,6 @@ namespace SecondDesktopDesktopManagerDll
         {
             Model = new MDesktopPanel();
             Width = SDSystem.WindowWidth - SDSystem.WindowMargin*2;
-            CurrentPage = 0;
             DesktopTitleReadOnly = true;
             DesktopTitleBackground = "#2D2D2D";
             DesktopImage = SDResource.DesktopImage;
@@ -34,27 +33,8 @@ namespace SecondDesktopDesktopManagerDll
             DesktopAddImage = SDResource.AddImage;
             DesktopDeleteImage = SDResource.DeleteImage;
 
-            LoadedCommand = new RelayCommand(new Action<object>(Loaded));
             DesktopDataManager.GetInstance().Update += Update;
             Update();
-        }
-
-        private ICommand _loadedCommand;
-        public ICommand LoadedCommand
-        {
-            get
-            {
-                return _loadedCommand;
-            }
-            set
-            {
-                _loadedCommand = value;
-            }
-        }
-
-        public void Loaded(object obj)
-        {
-
         }
 
         public double Width
@@ -99,10 +79,10 @@ namespace SecondDesktopDesktopManagerDll
 
         public int CurrentPage
         {
-            get { return Model.CurrentPage; }
+            get { return DesktopWindowManager.GetInstance().CurrentPage; }
             set
             {
-                Model.CurrentPage = value;
+				DesktopWindowManager.GetInstance().CurrentPage = value;
                 RaisePropertyChanged("CurrentPage");
             }
         }
@@ -248,47 +228,6 @@ namespace SecondDesktopDesktopManagerDll
                             }
                         }), null);
                 return settingsClickCommand;
-            }
-        }
-
-        private SDCommand<string> addClickCommand;
-        public SDCommand<string> AddClickCommand
-        {
-            get
-            {
-                if (addClickCommand == null)
-                    addClickCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            int page = 0;
-                            foreach (var item in DesktopDataManager.GetInstance().PageList)
-                            {
-                                if (page <= item.Key)
-                                {
-                                    page = item.Key + 1;
-                                }
-                            }
-
-                            DesktopDataManager.GetInstance().AddPage(page, "DESKTOP");
-                            CurrentPage = page;
-                            Update();
-                        }), null);
-                return addClickCommand;
-            }
-        }
-
-        private SDCommand<string> deleteClickCommand;
-        public SDCommand<string> DeleteClickCommand
-        {
-            get
-            {
-                if (deleteClickCommand == null)
-                    deleteClickCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            SecondDesktopMessager.GetInstance().ShowMessageBox("Are you sure to delete this Desktop Page?", CloseDesktop);
-                        }), null);
-                return deleteClickCommand;
             }
         }
 

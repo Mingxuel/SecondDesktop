@@ -22,14 +22,8 @@ namespace SecondDesktop
 {
     class VMMain : NotifyObject
     {
-        private readonly DialogHost _dialogHost;
-
-        public delegate void SelectPageDelegate(int Page);
-        public event SelectPageDelegate SelectPageNotify;
-
         public delegate void CloseAppDelegate();
         public event CloseAppDelegate CloseAppNotify;
-        private Func<bool, int> MassageBoxReturn = null;
 
         private bool IsShow = true;
         public IEnumerable<Swatch> Swatches { get; }
@@ -37,35 +31,26 @@ namespace SecondDesktop
         public VMMain()
         {
             Model = new MMain();
-            AppMainWindowVisibility = Visibility.Hidden;
-            MessageBoxVisibility = Visibility.Hidden;
+			AppWindowVisibility = Visibility.Hidden;
             MainWindowWidth = SDSystem.WindowWidth;
 
             HotkeyManager.GetInstance().RegisterHotKey("ShowWindow", LKey.None, RKey.F2, ShowWindow);
 
-            SecondDesktopMessager.GetInstance().ShowMessageBoxNotify += ShowMessageBox;
-
             Swatches = new SwatchesProvider().Swatches;
 
-            CalculateScreenSize();
+			Window win = Application.Current.MainWindow;
+			PresentationSource source = PresentationSource.FromVisual(win);
+			Matrix matrix = source.CompositionTarget.TransformFromDevice;
+			double widthRatio = matrix.M11;
+			double heightRatio = matrix.M22;
+			double screenWidth = SystemParameters.PrimaryScreenWidth * widthRatio;
+			double screenHeight = SystemParameters.PrimaryScreenHeight * heightRatio;
+			MainWindowHeight = SystemParameters.WorkArea.Size.Height * heightRatio;
+			MainWindowLeft = screenWidth - MainWindowWidth;
 
-            _dialogHost = new DialogHost();
-            _dialogHost.RaiseEvent(new RoutedEventArgs(FrameworkElement.LoadedEvent));
-            _dialogHost.IsOpen = true;
-        }
+			MessageBoxMessage = "Are you sure delete this desktop page?";
 
-        private void CalculateScreenSize()
-        {
-            Window win = Application.Current.MainWindow;
-            PresentationSource source = PresentationSource.FromVisual(win);
-            Matrix matrix = source.CompositionTarget.TransformFromDevice;
-            double widthRatio = matrix.M11;
-            double heightRatio = matrix.M22;
-            double screenWidth = SystemParameters.PrimaryScreenWidth * widthRatio;
-            double screenHeight = SystemParameters.PrimaryScreenHeight * heightRatio;
-            MainWindowHeight = SystemParameters.WorkArea.Size.Height * heightRatio;
-            MainWindowLeft = screenWidth - MainWindowWidth;
-        }
+		}
 
         private int ShowWindow()
         {
@@ -85,235 +70,221 @@ namespace SecondDesktop
             return 0;
         }
 
-        private ICommand _loadedCommand;
-        public ICommand LoadedCommand
-        {
-            get
-            {
-                return _loadedCommand;
-            }
-            set
-            {
-                _loadedCommand = value;
-            }
-        }
+		#region About MainWindow
+		public double MainWindowWidth
+		{
+			get { return Model.MainWindowWidth; }
+			set
+			{
+				Model.MainWindowWidth = value;
+				RaisePropertyChanged("MainWindowWidth");
+			}
+		}
 
-        public double MainWindowWidth
-        {
-            get { return Model.MainWindowWidth; }
-            set
-            {
-                Model.MainWindowWidth = value;
-                RaisePropertyChanged("MainWindowWidth");
-            }
-        }
+		public double MainWindowLeft
+		{
+			get { return Model.MainWindowLeft; }
+			set
+			{
+				Model.MainWindowLeft = value;
+				RaisePropertyChanged("MainWindowLeft");
+			}
+		}
 
-        public double MainWindowHeight
-        {
-            get { return Model.MainWindowHeight; }
-            set
-            {
-                Model.MainWindowHeight = value;
-                RaisePropertyChanged("MainWindowHeight");
-            }
-        }
+		public double MainWindowHeight
+		{
+			get { return Model.MainWindowHeight; }
+			set
+			{
+				Model.MainWindowHeight = value;
+				RaisePropertyChanged("MainWindowHeight");
+			}
+		}
+		#endregion
 
-        public double MainWindowLeft
-        {
-            get { return Model.MainWindowLeft; }
-            set
-            {
-                Model.MainWindowLeft = value;
-                RaisePropertyChanged("MainWindowLeft");
-            }
-        }
+		#region About AppWindow
+		public Visibility AppWindowVisibility
+		{
+			get { return Model.AppWindowVisibility; }
+			set
+			{
+				Model.AppWindowVisibility = value;
+				RaisePropertyChanged("AppWindowVisibility");
+			}
+		}
 
-        public Visibility AppMainWindowVisibility
-        {
-            get { return Model.AppMainWindowVisibility; }
-            set
-            {
-                Model.AppMainWindowVisibility = value;
-                RaisePropertyChanged("AppMainWindowVisibility");
-            }
-        }
+		public string AppIcon
+		{
+			get { return Model.AppIcon; }
+			set
+			{
+				Model.AppIcon = value;
+				RaisePropertyChanged("AppIcon");
+			}
+		}
 
-        public string AppTitle
-        {
-            get { return Model.AppTitle; }
-            set
-            {
-                Model.AppTitle = value;
-                RaisePropertyChanged("AppTitle");
-            }
-        }
+		public string AppTitle
+		{
+			get { return Model.AppTitle; }
+			set
+			{
+				Model.AppTitle = value;
+				RaisePropertyChanged("AppTitle");
+			}
+		}
 
-        int i = 0;
+		private SDCommand<string> appCloseClickCommand;
+		public SDCommand<string> AppCloseClickCommand
+		{
+			get
+			{
+				if (appCloseClickCommand == null)
+					appCloseClickCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							CloseAppNotify();
+						}), null);
+				return appCloseClickCommand;
+			}
+		}
+		#endregion
 
-        private SDCommand<string> appCloseClickCommand;
-        public SDCommand<string> AppCloseClickCommand
-        {
-            get
-            {
-                if (appCloseClickCommand == null)
-                    appCloseClickCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            CloseAppNotify();
-                        }), null);
-                return appCloseClickCommand;
-            }
-        }
+		#region About Apps
+		public double BottomDrawerHeight
+		{
+			get { return Model.BottomDrawerHeight; }
+			set
+			{
+				Model.BottomDrawerHeight = value;
+				RaisePropertyChanged("BottomDrawerHeight");
+			}
+		}
 
-        public string AppIcon
-        {
-            get { return Model.AppIcon; }
-            set
-            {
-                Model.AppIcon = value;
-                RaisePropertyChanged("AppIcon");
-            }
-        }
+		public Visibility AppsVisibility
+		{
+			get { return Model.AppsVisibility; }
+			set
+			{
+				Model.AppsVisibility = value;
+				RaisePropertyChanged("AppsVisibility");
+			}
+		}
 
-        public string AppCloseImage
-        {
-            get { return Model.AppCloseImage; }
-            set
-            {
-                Model.AppCloseImage = value;
-                RaisePropertyChanged("AppCloseImage");
-            }
-        }
+		public Visibility ThemeVisibility
+		{
+			get { return Model.ThemeVisibility; }
+			set
+			{
+				Model.ThemeVisibility = value;
+				RaisePropertyChanged("ThemeVisibility");
+			}
+		}
 
-        public Visibility MessageBoxVisibility
-        {
-            get { return Model.MessageBoxVisibility; }
-            set
-            {
-                Model.MessageBoxVisibility = value;
-                RaisePropertyChanged("MessageBoxVisibility");
-            }
-        }
+		private bool IsAppsSettings = false;
+		private SDCommand<string> appsSettingsCommand;
+		public SDCommand<string> AppsSettingsCommand
+		{
+			get
+			{
+				if (appsSettingsCommand == null)
+					appsSettingsCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							IsAppsSettings = !IsAppsSettings;
+							AppManager.GetInstance().SettingApp(IsAppsSettings);
+						}), null);
+				return appsSettingsCommand;
+			}
+		}
 
-        public string MessageBoxMessage
-        {
-            get { return Model.MessageBoxMessage; }
-            set
-            {
-                Model.MessageBoxMessage = value;
-                RaisePropertyChanged("MessageBoxMessage");
-            }
-        }
+		private SDCommand<bool> themeLightDarkCommand;
+		public SDCommand<bool> ThemeLightDarkCommand
+		{
+			get
+			{
+				if (themeLightDarkCommand == null)
+					themeLightDarkCommand = new SDCommand<bool>(
+						new Action<bool>(e =>
+						{
+							new PaletteHelper().SetLightDark(e);
+						}), null);
+				return themeLightDarkCommand;
+			}
+		}
 
-        private SDCommand<string> messageBoxYesClickCommand;
-        public SDCommand<string> MessageBoxYesClickCommand
-        {
-            get
-            {
-                if (messageBoxYesClickCommand == null)
-                    messageBoxYesClickCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            if(MassageBoxReturn != null)
-                            {
-                                MassageBoxReturn(true);
-                                MassageBoxReturn = null;
-                            }
-                            MessageBoxVisibility = Visibility.Hidden;
-                        }), null);
-                return messageBoxYesClickCommand;
-            }
-        }
+		private SDCommand<Swatch> themeColorCommand;
+		public SDCommand<Swatch> ThemeColorCommand
+		{
+			get
+			{
+				if (themeColorCommand == null)
+					themeColorCommand = new SDCommand<Swatch>(
+						new Action<Swatch>(e =>
+						{
+							new PaletteHelper().ReplacePrimaryColor(e);
+							new PaletteHelper().ReplaceAccentColor(e);
+						}), null);
+				return themeColorCommand;
+			}
+		}
+		#endregion
 
-        private SDCommand<string> messageBoxNoClickCommand;
-        public SDCommand<string> MessageBoxNoClickCommand
-        {
-            get
-            {
-                if (messageBoxNoClickCommand == null)
-                    messageBoxNoClickCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            if (MassageBoxReturn != null)
-                            {
-                                MassageBoxReturn(false);
-                                MassageBoxReturn = null;
-                            }
-                            MessageBoxVisibility = Visibility.Hidden;
-                        }), null);
-                return messageBoxNoClickCommand;
-            }
-        }
+		#region About Desktop
+		private bool IsDesktopSettings = false;
+		private SDCommand<string> settingsDesktopCommand;
+		public SDCommand<string> SettingsDesktopCommand
+		{
+			get
+			{
+				if (settingsDesktopCommand == null)
+					settingsDesktopCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							IsDesktopSettings = !IsDesktopSettings;
+						}), null);
+				return settingsDesktopCommand;
+			}
+		}
 
-        private async void ShowMessageBox(string pMessage, Func<bool, int> pReturn)
-        {
-            var view = new MessageBoxYesNo
-            {
-                DataContext = new VMMessageBoxYesNo()
-            };
+		private SDCommand<string> addDesktopCommand;
+		public SDCommand<string> AddDesktopCommand
+		{
+			get
+			{
+				if (addDesktopCommand == null)
+					addDesktopCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							DesktopWindowManager.GetInstance().AddDesktop();
+						}), null);
+				return addDesktopCommand;
+			}
+		}
 
-            //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ExtendedClosingEventHandler);
+		private SDCommand<string> deleteDesktopCommand;
+		public SDCommand<string> DeleteDesktopCommand
+		{
+			get
+			{
+				if (deleteDesktopCommand == null)
+					deleteDesktopCommand = new SDCommand<string>(
+						new Action<string>(e =>
+						{
+							DesktopWindowManager.GetInstance().DeleteDesktop();
+						}), null);
+				return deleteDesktopCommand;
+			}
+		}
 
-            //check the result...
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-
-            //MessageBoxMessage = pMessage;
-            //MessageBoxVisibility = Visibility.Visible;
-            //MassageBoxReturn = pReturn;
-        }
-
-        private void ExtendedOpenedEventHandler(object sender, DialogOpenedEventArgs eventargs)
-        {
-            Console.WriteLine("You could intercept the open and affect the dialog using eventArgs.Session.");
-        }
-
-        private void ExtendedClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            if ((bool)eventArgs.Parameter == false) return;
-
-            //OK, lets cancel the close...
-            eventArgs.Cancel();
-
-            //...now, lets update the "session" with some new content!
-            eventArgs.Session.UpdateContent(new MessageBoxYesNo());
-            //note, you can also grab the session when the dialog opens via the DialogOpenedEventHandler
-
-            //lets run a fake operation for 3 seconds then close this baby.
-            Task.Delay(TimeSpan.FromSeconds(3))
-                .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
-                    TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
-        private SDCommand<bool> themeLightDarkCommand;
-        public SDCommand<bool> ThemeLightDarkCommand
-        {
-            get
-            {
-                if (themeLightDarkCommand == null)
-                    themeLightDarkCommand = new SDCommand<bool>(
-                        new Action<bool>(e =>
-                        {
-                            new PaletteHelper().SetLightDark(e);
-                        }), null);
-                return themeLightDarkCommand;
-            }
-        }
-
-        private SDCommand<Swatch> themeColorCommand;
-        public SDCommand<Swatch> ThemeColorCommand
-        {
-            get
-            {
-                if (themeColorCommand == null)
-                    themeColorCommand = new SDCommand<Swatch>(
-                        new Action<Swatch>(e =>
-                        {
-                            new PaletteHelper().ReplacePrimaryColor(e);
-                            new PaletteHelper().ReplaceAccentColor(e);
-                        }), null);
-                return themeColorCommand;
-            }
-        }
-    }
+		public string MessageBoxMessage
+		{
+			get { return Model.MessageBoxMessage; }
+			set
+			{
+				Model.MessageBoxMessage = value;
+				RaisePropertyChanged("MessageBoxMessage");
+			}
+		}
+		#endregion
+	}
 }

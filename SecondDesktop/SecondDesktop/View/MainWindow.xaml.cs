@@ -45,7 +45,7 @@ namespace SecondDesktop
 
         private void SelectApp(string AppUID)
         {
-            ((VMMain)this.DataContext).AppMainWindowVisibility = Visibility.Visible;
+            ((VMMain)this.DataContext).AppWindowVisibility = Visibility.Visible;
             Assembly assembly = Assembly.LoadFrom(ConfigManager.GetInstance().ApplicationAppsDirectory + AppUID + "\\" + AppUID + ".dll");
             Type factory = assembly.GetType(AppUID + ".Factory");
             MethodInfo method = factory.GetMethod("CreateWindow");
@@ -58,7 +58,6 @@ namespace SecondDesktop
                 {
                     ViewModel.AppTitle = item.Name;
                     ViewModel.AppIcon = item.Icon;
-                    ViewModel.AppCloseImage = SDResource.DeleteImage;
                     break;
                 }
             }
@@ -70,12 +69,26 @@ namespace SecondDesktop
         private void CloseApp()
         {
             wpAppPanel.Children.Clear();
-            ((VMMain)this.DataContext).AppMainWindowVisibility = Visibility.Hidden;
+            ((VMMain)this.DataContext).AppWindowVisibility = Visibility.Hidden;
         }
  
         private void Window_LostFocus(object sender, RoutedEventArgs e)
 		{
 			Topmost = true;
+		}
+
+		private void AppsClick(object sender, RoutedEventArgs e)
+		{
+			ViewModel.ThemeVisibility = Visibility.Hidden;
+			ViewModel.AppsVisibility = Visibility.Visible;
+			ViewModel.BottomDrawerHeight = 156;
+		}
+
+		private void ThemeClick(object sender, RoutedEventArgs e)
+		{
+			ViewModel.ThemeVisibility = Visibility.Visible;
+			ViewModel.AppsVisibility = Visibility.Hidden;
+			ViewModel.BottomDrawerHeight = 124;
 		}
 	}
 }

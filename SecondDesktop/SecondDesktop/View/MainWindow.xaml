@@ -40,125 +40,19 @@
     </Window.Resources>
     <Grid Name="all">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:DrawerHost Panel.ZIndex="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <materialDesign:DrawerHost.TopDrawerContent>
-                <Grid Margin="0" Height="164">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="16"/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="8"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15"/>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="5"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right">Light</TextBlock>
-                        <ToggleButton Grid.Column="3" Margin="0" Command="{Binding ThemeLightDarkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
-                        <TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">Dark</TextBlock>
-                    </Grid>
-                    <ItemsControl Grid.Row="3" ItemsSource="{Binding Swatches, Mode=OneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type materialDesignColors:Swatch}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="32" />
-                                        <RowDefinition Height="8" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="8" />
-                                    </Grid.ColumnDefinitions>
-                                    <Border Name="ColorBorder" Grid.Row="0" Grid.Column="0"
-                                        Visibility="{Binding IsAccented, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{Binding ExemplarHue.Color, Mode=OneTime}" />
-                                        </Border.Background>
-                                        <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.ThemeColorCommand, Mode=OneTime}"
-                                            CommandParameter="{Binding}" Background="{Binding Background, ElementName=ColorBorder}" BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                                        </Button>
-                                    </Border>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <Grid Grid.Row="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="64"/>
-                            <ColumnDefinition Width="16"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="3" Content="CLOSE" Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                            CommandParameter="{x:Static Dock.Top}" Margin="0" Padding="0" Height="24" Width="64" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
-                    </Grid>
-                </Grid>
-            </materialDesign:DrawerHost.TopDrawerContent>
-            <Grid Width="348" VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="18"/>
-                    <RowDefinition Height="5"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="18"/>
-                    <ColumnDefinition Width="5"/>
-                </Grid.ColumnDefinitions>
-                <Button Name="Theme" Grid.Row="1" Grid.Column="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Top}" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="Theme" Width="14"/>
-                </Button>
-            </Grid>
-        </materialDesign:DrawerHost>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="2"/>
+                <RowDefinition Height="27"/>
             </Grid.RowDefinitions>
-           <Grid Grid.Row="0" Margin="0" Height="60">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="5"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </Grid>
-                <Label Content="SECOND DESKTOP" Margin="8,0,0,0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
-            </Grid>
             <desktopManager:DesktopPanel Grid.Row="1"/>
-            <Border Grid.Row="1" Panel.ZIndex="3" CornerRadius="4" BorderBrush="#007ACC" BorderThickness="2" Visibility="{Binding AppMainWindowVisibility, Mode=TwoWay}" >
+            <Border Grid.Row="2" Panel.ZIndex="3" CornerRadius="4" BorderBrush="#007ACC" BorderThickness="2" Visibility="{Binding AppWindowVisibility, Mode=TwoWay}" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"/>
@@ -175,44 +69,9 @@
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="1" Source="{Binding AppIcon, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="3" Text="{Binding AppTitle, Mode=TwoWay}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Button Grid.Column="4" Background="Transparent" Width="16" Height="16">
-                            <Button.Content>
-                                <Image Source="{Binding AppCloseImage, Mode=TwoWay}" Stretch="Fill"/>
-                            </Button.Content>
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}" >
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <EventTrigger RoutedEvent="Button.MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger RoutedEvent="Button.MouseLeave">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.1" />
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <cmd:SDEventCommand Command="{Binding AppCloseClickCommand}" CommandParameter=""/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                        <Button Grid.Column="4" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    Command="{Binding AppCloseClickCommand}" CommandParameter="" Width="12" Height="12">
+                            <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="Close" Width="12" Height="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
                     </Grid>
                     <ScrollViewer Grid.Row="1" Margin="0" VerticalScrollBarVisibility="Hidden" Background="#1D1D1D">
@@ -222,56 +81,222 @@
                     </ScrollViewer>
                 </Grid>
             </Border>
-            <appManager:AppPanel Grid.Row="2" Panel.ZIndex="3" VerticalAlignment="Bottom"/>
-            <Grid Grid.Row="1" Grid.RowSpan="3" Panel.ZIndex="4" Visibility="{Binding MessageBoxVisibility, Mode=TwoWay}" Background="#2D2D2D" Opacity="0.9">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="128"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="1" BorderThickness="2" CornerRadius="4" Background="{Binding Background, ElementName=Theme}">
-                    <WrapPanel Width="342" VerticalAlignment="Stretch" Orientation="Vertical">
-                        <Grid Background="{Binding Background, ElementName=Theme}" Width="342">
+            <Border Grid.Row="2" Margin="0 0 0 0" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" />
+        </Grid>
+        <materialDesign:DrawerHost Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="0,0,0,0" Height="{Binding MainWindowHeight, Mode=TwoWay}" >
+            <materialDesign:DrawerHost.BottomDrawerContent>
+                <Grid Margin="0" Height="{Binding BottomDrawerHeight}">
+                    <Grid Margin="0" Visibility="{Binding ThemeVisibility}">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="3"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="3"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="1" Text="Warning" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center" Height="20"/>
-                        </Grid>
-                        <Grid Width="Auto">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="5" Background="White" Width="342" Margin="-3,-3,-1,-1" >
-                                <Grid/>
-                            </Border>
-                            <Grid Grid.Row="0">
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="64"/>
-                                    <RowDefinition Height="8"/>
-                                    <RowDefinition Height="24"/>
-                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Margin="32,16,0,0" Text="{Binding MessageBoxMessage, Mode=TwoWay}" FontSize="18" Foreground="White" TextWrapping="Wrap"/>
-                                <Grid Grid.Row="2">
+                                <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="64"/>
-                                        <ColumnDefinition Width="12"/>
-                                        <ColumnDefinition Width="64"/>
-                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="7"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="5"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="1" Content="YES" Command="{Binding MessageBoxYesClickCommand}"
-                                        CommandParameter="" Margin="0" Padding="0" Height="24" Width="64" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
-                                    <Button Grid.Column="3" Content="NO" Command="{Binding MessageBoxNoClickCommand}"
-                                        CommandParameter="" Margin="0" Padding="0" Height="24" Width="64" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
+                                    <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right">Light</TextBlock>
+                                    <ToggleButton Grid.Column="3" Margin="0" Command="{Binding ThemeLightDarkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
+                                    <TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">Dark</TextBlock>
                                 </Grid>
+                                <ItemsControl Grid.Row="2" ItemsSource="{Binding Swatches, Mode=OneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type materialDesignColors:Swatch}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30" />
+                                                    <RowDefinition Height="7" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30" />
+                                                    <ColumnDefinition Width="7" />
+                                                </Grid.ColumnDefinitions>
+                                                <Border Name="ColorBorder" Grid.Row="0" Grid.Column="0"
+                                                    Visibility="{Binding IsAccented, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="{Binding ExemplarHue.Color, Mode=OneTime}" />
+                                                    </Border.Background>
+                                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.ThemeColorCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding}" Background="{Binding Background, ElementName=ColorBorder}" BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                                                    </Button>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                            <Border Grid.Column="2" Margin="0 2 0 0" BorderThickness="1 0 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}"/>
+                            <Grid Grid.Column="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}" Width="12" Height="12">
+                                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="Close" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Button>
                             </Grid>
                         </Grid>
-                    </WrapPanel>
-                </Border>
+                    </Grid>
+                    <Grid Margin="0" Visibility="{Binding AppsVisibility}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="3"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="3"/>
+                            </Grid.ColumnDefinitions>
+                            <appManager:AppSubPanel Grid.Column="1" VerticalAlignment="Top"/>
+                            <Border Grid.Column="2" Margin="0 2 0 0" BorderThickness="1 0 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}"/>
+                            <Grid Grid.Column="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}" Width="12" Height="12">
+                                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="Close" Width="12" Height="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Button>
+                                <ToggleButton Grid.Row="3" Grid.Column="3" Style="{StaticResource MaterialDesignActionToggleButton}"
+                                    Command="{Binding AppsSettingsCommand}" CommandParameter="" Width="12" Height="12">
+                                    <ToggleButton.Content>
+                                        <materialDesign:PackIcon Kind="Settings" Width="10" Height="10"/>
+                                    </ToggleButton.Content>
+                                    <materialDesign:ToggleButtonAssist.OnContent>
+                                        <materialDesign:PackIcon Kind="ContentSave" Width="10" Height="10"/>
+                                    </materialDesign:ToggleButtonAssist.OnContent>
+                                </ToggleButton>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </materialDesign:DrawerHost.BottomDrawerContent>
+            <Grid Width="348" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="CameraIris" Width="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Click="ThemeClick"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}" Width="16" Height="16"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="Transparent" Background="Transparent">
+                </Button>
+                <materialDesign:PackIcon Grid.Row="1" Grid.Column="1" Kind="CapsLock" Width="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Click="AppsClick"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}" Width="16" Height="16"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="Transparent" Background="Transparent">
+                </Button>
             </Grid>
-        </Grid>
+        </materialDesign:DrawerHost>
+        <materialDesign:DrawerHost Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0,0,0,0" Height="{Binding MainWindowHeight, Mode=TwoWay}" >
+            <materialDesign:DrawerHost.TopDrawerContent>
+                <Grid Margin="0" Height="110">
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="24"/>
+                            <RowDefinition Height="8"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="24,24,0,0" Text="{Binding MessageBoxMessage, Mode=TwoWay}" FontSize="18" TextWrapping="Wrap"/>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="64"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="64"/>
+                                <ColumnDefinition Width="16"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}" Height="24"
+                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Top}" Foreground="{DynamicResource MaterialDesignBody}">YES
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cmd:SDEventCommand Command="{Binding DeleteDesktopCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Height="24"
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Top}" Foreground="{DynamicResource MaterialDesignBody}">NO
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </materialDesign:DrawerHost.TopDrawerContent>
+            <Grid Width="348" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7"/>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <ToggleButton Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignActionToggleButton}" 
+                    Command="{Binding SettingsDesktopCommand}" CommandParameter="" Width="16" Height="16"
+                              materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <ToggleButton.Content>
+                        <materialDesign:PackIcon Kind="Settings" Width="14" Height="14"/>
+                    </ToggleButton.Content>
+                    <materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="ContentSave" Width="14" Height="14"/>
+                    </materialDesign:ToggleButtonAssist.OnContent>
+                </ToggleButton>
+                <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Command="{Binding AddDesktopCommand}" CommandParameter="" Width="16" Height="16" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <materialDesign:PackIcon Kind="Add" Width="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="5" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Top}" Width="16" Height="16"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <materialDesign:PackIcon Kind="Delete" Width="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+        </materialDesign:DrawerHost>
     </Grid>
 </Window>

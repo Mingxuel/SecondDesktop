@@ -22,12 +22,16 @@ namespace SecondDesktop
         public double MainWindowHeight;
         public double MainWindowLeft;
 
-        public Visibility AppMainWindowVisibility;
+        public Visibility AppWindowVisibility;
         public string AppIcon;
         public string AppTitle;
         public string AppCloseImage;
 
         public Visibility MessageBoxVisibility;
         public string MessageBoxMessage;
-    }
+
+		public Visibility ThemeVisibility;
+		public Visibility AppsVisibility;
+		public double BottomDrawerHeight;
+	}
 }

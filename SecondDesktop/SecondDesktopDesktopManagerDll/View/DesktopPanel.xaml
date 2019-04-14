@@ -10,11 +10,26 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="344">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="23"/>
+            <RowDefinition Height="1"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
@@ -33,26 +48,15 @@
                     <ColumnDefinition Width="16"/>
                     <ColumnDefinition Width="3"/>
                 </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Grid.Column="1" Kind="DesktopWindows" Width="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center" IsReadOnly="{Binding DesktopTitleReadOnly, Mode=TwoWay}" BorderThickness="0"/>
-                <Button Grid.Column="5" Command="{Binding SettingsClickCommand}"
-                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
-                    <materialDesign:PackIcon Kind="Settings" Width="12"/>
-                </Button>
-                <Button Grid.Column="7" Command="{Binding AddClickCommand}"
-                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
-                    <materialDesign:PackIcon Kind="Add" Width="16"/>
-                </Button>
-                <Button Grid.Column="9" Command="{Binding DeleteClickCommand}"
-                        CommandParameter="" Margin="0" Padding="0" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="16" Height="16">
-                    <materialDesign:PackIcon Kind="Delete" Width="12"/>
-                </Button>
+                <materialDesign:PackIcon Grid.Column="1" Kind="Application" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center" BorderThickness="0"/>
             </Grid>
         </Border>
-        <ScrollViewer Name="svDesktop" Grid.Row="1" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1">
+        <Border Grid.Row="1" Margin="0 0 0 0" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}"/>
+        <ScrollViewer Name="svDesktop" Grid.Row="2" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1">
             <WrapPanel Name="wpDesktop"/>
         </ScrollViewer>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <ItemsControl x:Name="ICPage" ItemsSource="{Binding DesktopPageItems, Mode=TwoWay}" VerticalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -64,17 +68,13 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2"/>
-                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="8"/>
                                 <ColumnDefinition Width="2"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Row="0" Grid.Column="1" BorderBrush="#3D3D3D" BorderThickness="1" Width="14" Height="25" Background="#3D3D3D">
-                                <Image Source="{Binding Image, Mode=TwoWay}" Stretch="None"/>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PreviewMouseDown">
-                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.PageClickCommand, ElementName=ICPage}" CommandParameter="{Binding Page, Mode=TwoWay}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Border>
+                            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    Command="{Binding Path=DataContext.PageClickCommand, ElementName=ICPage}" CommandParameter="{Binding Page, Mode=TwoWay}" Width="8" Height="8">
+                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="{Binding Image, Mode=TwoWay}" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

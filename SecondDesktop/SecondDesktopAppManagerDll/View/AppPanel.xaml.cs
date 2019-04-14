@@ -20,10 +20,12 @@ namespace SecondDesktopAppManagerDll
     /// </summary>
     public partial class AppPanel : UserControl
     {
-        public AppPanel()
+		VMAppPanel ViewModel = null;
+		public AppPanel()
         {
             InitializeComponent();
-            this.DataContext = new VMAppPanel();
-        }
-    }
+			ViewModel = new VMAppPanel();
+			this.DataContext = ViewModel;
+		}
+	}
 }

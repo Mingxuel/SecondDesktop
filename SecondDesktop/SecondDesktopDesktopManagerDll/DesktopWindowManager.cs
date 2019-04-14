@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SecondDesktopDesktopManagerDll
 {
-    class DesktopWindowManager
+    public class DesktopWindowManager
     {
         private static DesktopWindowManager windowManager = null;
         public static DesktopWindowManager GetInstance()
@@ -18,5 +18,59 @@ namespace SecondDesktopDesktopManagerDll
 
             return windowManager;
         }
+
+		private int currentPage = 0;
+		public int CurrentPage
+		{
+			get
+			{
+				return currentPage;
+			}
+			set
+			{
+				currentPage = value;
+			}
+		}
+
+		private bool isSettings = false;
+		public bool IsSettings
+		{
+			get
+			{
+				return isSettings;
+			}
+			set
+			{
+				isSettings = value;
+			}
+		}
+
+		public void SettingsDesktop()
+		{
+			IsSettings = !IsSettings;
+
+		}
+
+		public void AddDesktop()
+		{
+			int page = 0;
+			foreach (var item in DesktopDataManager.GetInstance().PageList)
+			{
+				if (page <= item.Key)
+				{
+					page = item.Key + 1;
+				}
+			}
+
+			DesktopDataManager.GetInstance().AddPage(page, "DESKTOP");
+			CurrentPage = page;
+		}
+
+		public void DeleteDesktop()
+		{
+			DesktopDataManager.GetInstance().DeletePage(CurrentPage);
+		}
+
+
     }
 }
