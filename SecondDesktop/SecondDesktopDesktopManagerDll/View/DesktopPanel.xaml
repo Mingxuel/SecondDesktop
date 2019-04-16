@@ -26,19 +26,19 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="23"/>
+            <RowDefinition Height="24"/>
             <RowDefinition Height="1"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="White" BorderThickness="0">
+        <materialDesign:Card Grid.Row="0" materialDesign:ShadowAssist.ShadowDepth="Depth1"  materialDesign:ShadowAssist.ShadowEdges="Bottom" Padding="0,0,0,4" Width="348" Margin="-1,-4,-1, 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="16"/>
@@ -48,11 +48,16 @@
                     <ColumnDefinition Width="16"/>
                     <ColumnDefinition Width="3"/>
                 </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Grid.Column="1" Kind="Application" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center" BorderThickness="0"/>
+                <materialDesign:PackIcon Grid.Column="1" Kind="Application" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="3" Text="{Binding DesktopTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="200" VerticalAlignment="Center" BorderThickness="0" Height="20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <cmd:SDEventCommand Command="{Binding SaveTitleCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
             </Grid>
-        </Border>
-        <Border Grid.Row="1" Margin="0 0 0 0" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}"/>
+        </materialDesign:Card>
         <ScrollViewer Name="svDesktop" Grid.Row="2" Margin="0" VerticalScrollBarVisibility="Hidden" Panel.ZIndex="1">
             <WrapPanel Name="wpDesktop"/>
         </ScrollViewer>

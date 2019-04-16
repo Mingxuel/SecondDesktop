@@ -1,4 +1,5 @@
-﻿using SecondDesktopDll;
+﻿using MaterialDesignThemes.Wpf;
+using SecondDesktopDll;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
@@ -12,26 +13,28 @@ namespace SecondDesktopAppManagerDll
         [DataMember]
         public int Page { get; set; }
         [DataMember]
-        public bool IsSelect {
+        public bool IsSelect
+        {
             get
             {
                 return isSelect;
             }
             set
             {
-                if(value)
+                if (value)
                 {
-                    Image = focusImage;
-                } else
+                    Image = PackIconKind.CheckboxBlankCircleOutline;
+                }
+                else
                 {
-                    Image = unFocusImage;
+                    Image = PackIconKind.CheckboxBlankCircle;
                 }
                 isSelect = value;
             }
         }
         private bool isSelect = false;
         [DataMember]
-        public string Image
+        public PackIconKind Image
         {
             get
             {
@@ -42,9 +45,6 @@ namespace SecondDesktopAppManagerDll
                 image = value;
             }
         }
-        private string image = null;
-
-        private readonly string focusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageFocus.png";
-        private readonly string unFocusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageUnFocus.png";
+        private PackIconKind image = PackIconKind.StarFourPoints;
     }
 }

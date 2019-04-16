@@ -15,16 +15,6 @@ namespace SecondDesktopDesktopManagerDll
         public string AppImage;
         public string AppTitle;
 
-        public string MoveUpImage;
-        public string MoveDownImage;
-        public string MoveLeftImage;
-        public string MoveRightImage;
-        public string AppDeleteImage;
-
-        public Visibility MoveUpVisibility;
-        public Visibility MoveDownVisibility;
-        public Visibility MoveLeftVisibility;
-        public Visibility MoveRightVisibility;
-        public Visibility AppDeleteVisibility;
+        public Visibility SettingsButtonVisibility;
     }
 }

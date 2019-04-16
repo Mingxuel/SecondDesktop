@@ -49,8 +49,7 @@ namespace SecondDesktop
 			MainWindowLeft = screenWidth - MainWindowWidth;
 
 			MessageBoxMessage = "Are you sure delete this desktop page?";
-
-		}
+        }
 
         private int ShowWindow()
         {
@@ -227,10 +226,66 @@ namespace SecondDesktop
 				return themeColorCommand;
 			}
 		}
-		#endregion
+        #endregion
 
-		#region About Desktop
-		private bool IsDesktopSettings = false;
+        #region About Desktop
+        private bool isAppWindowOpen;
+        public bool IsAppWindowOpen
+        {
+            get { return isAppWindowOpen; }
+            set
+            {
+                if (isAppWindowOpen == value) return;
+                isAppWindowOpen = value;
+                RaisePropertyChanged("IsAppWindowOpen");
+            }
+        }
+
+        private object appWindowContent;
+        public object AppWindowContent
+        {
+            get { return appWindowContent; }
+            set
+            {
+                if (appWindowContent == value) return;
+                appWindowContent = value;
+                RaisePropertyChanged("AppWindowContent");
+            }
+        }
+
+        private SDCommand<string> appWindowAcceptCommand;
+        public SDCommand<string> AppWindowAcceptCommand
+        {
+            get
+            {
+                if (appWindowAcceptCommand == null)
+                    appWindowAcceptCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            AppWindowContent = new MessageBoxYesNo();
+                            Task.Delay(TimeSpan.FromSeconds(3))
+                                .ContinueWith((t, _) => IsAppWindowOpen = false, null,
+                                    TaskScheduler.FromCurrentSynchronizationContext());
+                        }), null);
+                return appWindowAcceptCommand;
+            }
+        }
+
+        private SDCommand<string> appWindowCancelCommand;
+        public SDCommand<string> AppWindowCancelCommand
+        {
+            get
+            {
+                if (appWindowCancelCommand == null)
+                    appWindowCancelCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            IsAppWindowOpen = false;
+                        }), null);
+                return appWindowCancelCommand;
+            }
+        }
+
 		private SDCommand<string> settingsDesktopCommand;
 		public SDCommand<string> SettingsDesktopCommand
 		{
@@ -240,7 +295,7 @@ namespace SecondDesktop
 					settingsDesktopCommand = new SDCommand<string>(
 						new Action<string>(e =>
 						{
-							IsDesktopSettings = !IsDesktopSettings;
+                            DesktopWindowManager.GetInstance().SettingsDesktop();
 						}), null);
 				return settingsDesktopCommand;
 			}

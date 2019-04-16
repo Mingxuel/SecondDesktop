@@ -187,7 +187,8 @@ namespace SecondDesktopDesktopManagerDll
                     i--;
                 }
             }
-            foreach(var item in tempList)
+
+            foreach (var item in tempList)
             {
                 PageList.Add(item.Key, item.Value);
             }
@@ -203,7 +204,9 @@ namespace SecondDesktopDesktopManagerDll
 
         public void SaveSubApp()
         {
-            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopDataManager));
+			PageList = PageList.OrderBy(o => o.Key).ToDictionary(o => o.Key, p => p.Value);
+
+			DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopDataManager));
             MemoryStream memoryStream = new MemoryStream();
             js.WriteObject(memoryStream, DesktopDataManager.GetInstance());
             memoryStream.Position = 0;
@@ -215,6 +218,12 @@ namespace SecondDesktopDesktopManagerDll
             File.WriteAllText(ConfigPath, json);
 
             if(Update != null)
+                Update();
+        }
+
+        public void UpdateDesktop()
+        {
+            if (Update != null)
                 Update();
         }
     }

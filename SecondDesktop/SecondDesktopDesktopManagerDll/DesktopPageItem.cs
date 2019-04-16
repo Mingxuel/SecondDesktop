@@ -51,8 +51,5 @@ namespace SecondDesktopDesktopManagerDll
             }
         }
         private PackIconKind image = PackIconKind.StarFourPoints;
-
-        private readonly string focusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageFocus.png";
-		private readonly string unFocusImage = ConfigManager.GetInstance().ApplicationDirectory + "Resource/App/AppPageUnFocus.png";
     }
 }

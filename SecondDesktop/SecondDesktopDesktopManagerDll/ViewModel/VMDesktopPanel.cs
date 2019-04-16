@@ -202,6 +202,21 @@ namespace SecondDesktopDesktopManagerDll
             }
         }
 
+        private SDCommand<string> saveTitleCommand;
+        public SDCommand<string> SaveTitleCommand
+        {
+            get
+            {
+                if (saveTitleCommand == null)
+                    saveTitleCommand = new SDCommand<string>(
+                        new Action<string>(e =>
+                        {
+                            DesktopDataManager.GetInstance().ModifyPage(CurrentPage, DesktopTitle);
+                        }), null);
+                return saveTitleCommand;
+            }
+        }
+
         private SDCommand<string> settingsClickCommand;
         public SDCommand<string> SettingsClickCommand
         {

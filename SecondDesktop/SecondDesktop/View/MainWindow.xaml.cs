@@ -61,9 +61,8 @@ namespace SecondDesktop
                     break;
                 }
             }
-            wpAppPanel.Children.Clear();
-            wpAppPanel.Children.Add(uc);
-            ViewModel.CloseAppNotify += CloseApp;
+            ViewModel.AppWindowContent = uc;
+            ViewModel.IsAppWindowOpen = true;
         }
 
         private void CloseApp()

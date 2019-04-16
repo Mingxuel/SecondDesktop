@@ -56,9 +56,13 @@
                                 <ColumnDefinition Width="36"/>
                                 <ColumnDefinition Width="6"/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="0" Grid.Column="1"
-                                Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}" Width="36" Height="36"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth2" >
+                            <Button Grid.Row="0" Grid.Column="1" Width="36" Height="36" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}" Foreground="{DynamicResource MaterialDesignBody}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.AppClickCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
                             <Image  Grid.Row="0" Grid.Column="1" Source="{Binding Icon, Mode=TwoWay}" Width="36" Height="36" IsHitTestVisible="False"/>
                             <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" VerticalAlignment="Top" HorizontalAlignment="Right"
@@ -86,13 +90,10 @@
                                 <ColumnDefinition Width="12"/>
                                 <ColumnDefinition Width="3"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0" Grid.Column="1" Source="{Binding Image, Mode=TwoWay}" Stretch="None">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PreviewMouseDown">
-                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.PageClickCommand, ElementName=ICPage}" CommandParameter="{Binding Page,Mode=TwoWay}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Image>
+                            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                    Command="{Binding Path=DataContext.PageClickCommand, ElementName=ICPage}" CommandParameter="{Binding Page,Mode=TwoWay}" Width="8" Height="8">
+                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="3" Kind="{Binding Image, Mode=TwoWay}" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

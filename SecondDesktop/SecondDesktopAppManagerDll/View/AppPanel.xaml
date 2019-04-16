@@ -9,7 +9,7 @@
              mc:Ignorable="d" Height="{Binding Height}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="24"/>
             <RowDefinition Height="144"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="White" BorderThickness="0">

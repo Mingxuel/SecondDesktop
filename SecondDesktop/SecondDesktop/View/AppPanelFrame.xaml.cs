@@ -20,13 +20,13 @@ namespace SecondDesktop
     /// <summary>
     /// Interaction logic for PopupFrame.xaml
     /// </summary>
-    public partial class AppPanelFrame : UserControl
+    public partial class AppWindowFrame : UserControl
     {
         public delegate void CloseDelegate();
         public event CloseDelegate CloseNotify;
 
 		VMAppPanelFrame ViewModel = null;
-		public AppPanelFrame()
+		public AppWindowFrame()
         {
             InitializeComponent();
 			ViewModel = new VMAppPanelFrame();

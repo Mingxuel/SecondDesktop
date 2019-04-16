@@ -32,14 +32,10 @@ namespace SecondDesktopDesktopManagerDll
                 }
             }
 
-            MoveUpImage = SDResource.MoveTopImage;
-            MoveDownImage = SDResource.MoveBottomImage;
-            MoveLeftImage = SDResource.MoveLeftImage;
-            MoveRightImage = SDResource.MoveRightImage;
-            AppDeleteImage = SDResource.DeleteImage;
-
-            SecondDesktopMessager.GetInstance().DesktopSettingsNotify += DesktopSettings;
+            DesktopWindowManager.GetInstance().DesktopSettingsCallback += DesktopSettings;
+            DesktopSettings(DesktopWindowManager.GetInstance().IsSettings);
         }
+
         public double Width
         {
             get { return Model.Width; }
@@ -80,103 +76,13 @@ namespace SecondDesktopDesktopManagerDll
             }
         }
 
-        public string MoveUpImage
+        public Visibility SettingsButtonVisibility
         {
-            get { return Model.MoveUpImage; }
+            get { return Model.SettingsButtonVisibility; }
             set
             {
-                Model.MoveUpImage = value;
-                RaisePropertyChanged("MoveUpImage");
-            }
-        }
-
-        public string MoveDownImage
-        {
-            get { return Model.MoveDownImage; }
-            set
-            {
-                Model.MoveDownImage = value;
-                RaisePropertyChanged("MoveDownImage");
-            }
-        }
-
-        public string MoveLeftImage
-        {
-            get { return Model.MoveLeftImage; }
-            set
-            {
-                Model.MoveLeftImage = value;
-                RaisePropertyChanged("MoveLeftImage");
-            }
-        }
-
-        public string MoveRightImage
-        {
-            get { return Model.MoveRightImage; }
-            set
-            {
-                Model.MoveRightImage = value;
-                RaisePropertyChanged("MoveRightImage");
-            }
-        }
-
-        public string AppDeleteImage
-        {
-            get { return Model.AppDeleteImage; }
-            set
-            {
-                Model.AppDeleteImage = value;
-                RaisePropertyChanged("AppDeleteImage");
-            }
-        }
-
-        public Visibility MoveUpVisibility
-        {
-            get { return Model.MoveUpVisibility; }
-            set
-            {
-                Model.MoveUpVisibility = value;
-                RaisePropertyChanged("MoveUpVisibility");
-            }
-        }
-
-        public Visibility MoveDownVisibility
-        {
-            get { return Model.MoveDownVisibility; }
-            set
-            {
-                Model.MoveDownVisibility = value;
-                RaisePropertyChanged("MoveDownVisibility");
-            }
-        }
-
-        public Visibility MoveLeftVisibility
-        {
-            get { return Model.MoveLeftVisibility; }
-            set
-            {
-                Model.MoveLeftVisibility = value;
-                RaisePropertyChanged("MoveLeftVisibility");
-            }
-        }
-
-        public Visibility MoveRightVisibility
-        {
-            get { return Model.MoveRightVisibility; }
-            set
-            {
-                Model.MoveRightVisibility = value;
-                RaisePropertyChanged("MoveRightVisibility");
-            }
-        }
-
-        public Visibility AppDeleteVisibility
-        {
-            get { return Model.AppDeleteVisibility; }
-            set
-            {
-                Model.AppDeleteVisibility = value;
-                RaisePropertyChanged("AppDeleteVisibility");
+                Model.SettingsButtonVisibility = value;
+                RaisePropertyChanged("SettingsButtonVisibility");
             }
         }
 
@@ -321,19 +227,11 @@ namespace SecondDesktopDesktopManagerDll
         {
             if (pIsSettings)
             {
-                MoveUpVisibility = Visibility.Visible;
-                MoveDownVisibility = Visibility.Visible;
-                MoveLeftVisibility = Visibility.Visible;
-                MoveRightVisibility = Visibility.Visible;
-                AppDeleteVisibility = Visibility.Visible;
+                SettingsButtonVisibility = Visibility.Visible;
             }
             else
             {
-                MoveUpVisibility = Visibility.Hidden;
-                MoveDownVisibility = Visibility.Hidden;
-                MoveLeftVisibility = Visibility.Hidden;
-                MoveRightVisibility = Visibility.Hidden;
-                AppDeleteVisibility = Visibility.Hidden;
+                SettingsButtonVisibility = Visibility.Hidden;
             }
         }
     }

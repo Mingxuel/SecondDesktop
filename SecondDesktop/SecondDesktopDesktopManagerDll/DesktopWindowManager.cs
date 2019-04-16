@@ -8,6 +8,9 @@ namespace SecondDesktopDesktopManagerDll
 {
     public class DesktopWindowManager
     {
+        public delegate void DesktopSettingsDelegate(bool pIsSettings);
+        public event DesktopSettingsDelegate DesktopSettingsCallback;
+
         private static DesktopWindowManager windowManager = null;
         public static DesktopWindowManager GetInstance()
         {
@@ -48,8 +51,9 @@ namespace SecondDesktopDesktopManagerDll
 		public void SettingsDesktop()
 		{
 			IsSettings = !IsSettings;
-
-		}
+            if (DesktopSettingsCallback != null)
+                DesktopSettingsCallback(IsSettings);
+        }
 
 		public void AddDesktop()
 		{
@@ -64,13 +68,19 @@ namespace SecondDesktopDesktopManagerDll
 
 			DesktopDataManager.GetInstance().AddPage(page, "DESKTOP");
 			CurrentPage = page;
-		}
+            UpdateDesktop();
+        }
 
 		public void DeleteDesktop()
 		{
 			DesktopDataManager.GetInstance().DeletePage(CurrentPage);
-		}
+            CurrentPage = 0;
+            UpdateDesktop();
+        }
 
-
+        public void UpdateDesktop()
+        {
+            DesktopDataManager.GetInstance().UpdateDesktop();
+        }
     }
 }
