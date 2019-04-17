@@ -107,7 +107,7 @@ namespace SecondDesktopDesktopManagerDll
                                         DesktopItem temp = DesktopDataManager.GetInstance().DesktopItemList[i];
                                         DesktopDataManager.GetInstance().DesktopItemList[i] = DesktopDataManager.GetInstance().DesktopItemList[preIndex];
                                         DesktopDataManager.GetInstance().DesktopItemList[preIndex] = temp;
-                                        DesktopDataManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().Save();
                                         break;
                                     }
                                     else
@@ -142,7 +142,7 @@ namespace SecondDesktopDesktopManagerDll
                                         DesktopItem temp = DesktopDataManager.GetInstance().DesktopItemList[i];
                                         DesktopDataManager.GetInstance().DesktopItemList[i] = DesktopDataManager.GetInstance().DesktopItemList[nextIndex];
                                         DesktopDataManager.GetInstance().DesktopItemList[nextIndex] = temp;
-                                        DesktopDataManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().Save();
                                         break;
                                     }
                                     else
@@ -172,7 +172,7 @@ namespace SecondDesktopDesktopManagerDll
                                     if (item.Page != 0)
                                     {
                                         item.Page--;
-                                        DesktopDataManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().Save();
                                         break;
                                     }
                                 }
@@ -198,7 +198,7 @@ namespace SecondDesktopDesktopManagerDll
                                     if (item.Page != (DesktopDataManager.GetInstance().PageList.Count - 1))
                                     {
                                         item.Page++;
-                                        DesktopDataManager.GetInstance().SaveSubApp();
+                                        DesktopDataManager.GetInstance().Save();
                                         break;
                                     }
                                 }

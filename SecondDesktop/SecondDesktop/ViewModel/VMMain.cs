@@ -49,7 +49,10 @@ namespace SecondDesktop
 			MainWindowLeft = screenWidth - MainWindowWidth;
 
 			MessageBoxMessage = "Are you sure delete this desktop page?";
-        }
+
+			DesktopWindowManager.GetInstance().ThemeDark = DesktopWindowManager.GetInstance().ThemeDark;
+			DesktopWindowManager.GetInstance().ThemeColor = DesktopWindowManager.GetInstance().ThemeColor;
+		}
 
         private int ShowWindow()
         {
@@ -205,7 +208,7 @@ namespace SecondDesktop
 					themeLightDarkCommand = new SDCommand<bool>(
 						new Action<bool>(e =>
 						{
-							new PaletteHelper().SetLightDark(e);
+							DesktopWindowManager.GetInstance().ThemeDark = e;
 						}), null);
 				return themeLightDarkCommand;
 			}
@@ -220,8 +223,7 @@ namespace SecondDesktop
 					themeColorCommand = new SDCommand<Swatch>(
 						new Action<Swatch>(e =>
 						{
-							new PaletteHelper().ReplacePrimaryColor(e);
-							new PaletteHelper().ReplaceAccentColor(e);
+							DesktopWindowManager.GetInstance().ThemeColor = e;
 						}), null);
 				return themeColorCommand;
 			}

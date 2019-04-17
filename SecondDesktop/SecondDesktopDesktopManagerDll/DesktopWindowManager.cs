@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -82,5 +84,64 @@ namespace SecondDesktopDesktopManagerDll
         {
             DesktopDataManager.GetInstance().UpdateDesktop();
         }
-    }
+
+		private IEnumerable<Swatch> swatches = null;
+		private IEnumerable<Swatch> Swatches
+		{
+			get
+			{
+				if (swatches == null)
+				{
+					swatches = new SwatchesProvider().Swatches;
+				}
+
+				return swatches;
+			}
+		}
+
+		public bool ThemeDark
+		{
+			get
+			{
+				return DesktopDataManager.GetInstance().Theme.IsDark;
+			}
+			set
+			{
+				new PaletteHelper().SetLightDark(value);
+				DesktopDataManager.GetInstance().SetThemeDark(value);
+			}
+		}
+
+		public Swatch ThemeColor
+		{
+			get
+			{
+				for (int i = 0; i < Swatches.Count(); i++)
+				{
+					if (DesktopDataManager.GetInstance().Theme.Color == i)
+					{
+						return Swatches.ElementAt(i);
+					}
+				}
+
+				DesktopDataManager.GetInstance().SetThemeColor(0);
+				return Swatches.ElementAt(0);
+			}
+
+			set
+			{
+				for (int i = 0; i < Swatches.Count(); i++)
+				{
+					if (Swatches.ElementAt(i).Name == value.Name)
+					{
+						DesktopDataManager.GetInstance().SetThemeColor(i);
+						break;
+					}
+				}
+
+				new PaletteHelper().ReplacePrimaryColor(value);
+				new PaletteHelper().ReplaceAccentColor(value);
+			}
+		}
+	}
 }

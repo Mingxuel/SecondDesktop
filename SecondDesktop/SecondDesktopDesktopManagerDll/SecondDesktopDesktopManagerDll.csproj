@@ -62,6 +62,7 @@
     <Compile Include="DesktopItem.cs" />
     <Compile Include="DesktopDataManager.cs" />
     <Compile Include="DesktopPageItem.cs" />
+    <Compile Include="DesktopTheme.cs" />
     <Compile Include="DesktopWindowManager.cs" />
     <Compile Include="Model\MDesktopPanel.cs" />
     <Compile Include="Model\MSubAppFrame.cs" />

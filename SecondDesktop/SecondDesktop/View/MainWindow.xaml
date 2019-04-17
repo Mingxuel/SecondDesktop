@@ -202,7 +202,7 @@
                     </Grid>
                 </Grid>
             </materialDesign:DrawerHost.BottomDrawerContent>
-            <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth3"  materialDesign:ShadowAssist.ShadowEdges="Top" Padding="0,4,0,0" Width="348" VerticalAlignment="Bottom" Margin="-1,0,-1,0">
+            <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth2"  materialDesign:ShadowAssist.ShadowEdges="Top" Padding="0,4,0,0" Width="348" VerticalAlignment="Bottom" Margin="-1,0,-1,0">
                 <Grid Width="348">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1"/>

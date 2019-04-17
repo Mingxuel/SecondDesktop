@@ -1,4 +1,5 @@
-﻿using SecondDesktopDll;
+﻿using MaterialDesignColors;
+using SecondDesktopDll;
 using SecondDesktopMessagerDll;
 using System;
 using System.Collections.Generic;
@@ -10,46 +11,75 @@ using System.Threading.Tasks;
 
 namespace SecondDesktopDesktopManagerDll
 {
-    public class DesktopDataManager
-    {
-        public delegate void UpdateDelegate();
-        public event UpdateDelegate Update;
+	public class DesktopDataManager
+	{
+		public delegate void UpdateDelegate();
+		public event UpdateDelegate Update;
 
-        public List<DesktopItem> desktopItemList = null;
-        public List<DesktopItem> DesktopItemList
-        {
-            get
-            {
-                if (desktopItemList == null)
-                {
-                    desktopItemList = new List<DesktopItem>();
-                }
-                return desktopItemList;
-            }
-            set
-            {
-                desktopItemList = value;
-            }
-        }
+		public List<DesktopItem> desktopItemList = null;
+		public List<DesktopItem> DesktopItemList
+		{
+			get
+			{
+				if (desktopItemList == null)
+				{
+					desktopItemList = new List<DesktopItem>();
+				}
+				return desktopItemList;
+			}
+			set
+			{
+				desktopItemList = value;
+			}
+		}
 
-        public Dictionary<int, string> pageList = null;
-        public Dictionary<int, string> PageList
-        {
-            get
-            {
-                if (pageList == null)
-                {
-                    pageList = new Dictionary<int, string>();
-                }
-                return pageList;
-            }
-            set
-            {
-                pageList = value;
-            }
-        }
+		public Dictionary<int, string> pageList = null;
+		public Dictionary<int, string> PageList
+		{
+			get
+			{
+				if (pageList == null)
+				{
+					pageList = new Dictionary<int, string>();
+				}
+				return pageList;
+			}
+			set
+			{
+				pageList = value;
+			}
+		}
 
-        private static string ConfigPath = "";
+		private DesktopTheme theme;
+		public DesktopTheme Theme
+		{
+			get
+			{
+				if (theme == null)
+				{
+					theme = new DesktopTheme();
+				}
+				return theme;
+			}
+			set
+			{
+				theme = value;
+			}
+		}
+
+		public void SetThemeDark(bool IsDark)
+		{
+			Theme.IsDark = IsDark;
+			Save();
+		}
+
+		public void SetThemeColor(int Color)
+		{
+			Theme.Color = Color;
+			Save();
+		}
+
+		private static string ConfigPath = "";
         private static DesktopDataManager desktopManager = null;
         public static DesktopDataManager GetInstance()
         {
@@ -83,7 +113,7 @@ namespace SecondDesktopDesktopManagerDll
             {
                 desktopManager.AddPage(0, "DESKTOP");
             }
-        }
+		}
 
         public string CreateSubAppConfig(string AppUID)
         {
@@ -106,7 +136,7 @@ namespace SecondDesktopDesktopManagerDll
         public void AddSubApp(DesktopItem Item)
         {
             DesktopItemList.Add(Item);
-            SaveSubApp();
+            Save();
         }
 
         public void DeleteSubApp(DesktopItem Item)
@@ -156,13 +186,13 @@ namespace SecondDesktopDesktopManagerDll
                 }
             }
 
-            SaveSubApp();
+            Save();
         }
 
         public void AddPage(int Page, string Title)
         {
             PageList.Add(Page, Title);
-            SaveSubApp();
+            Save();
         }
 
         public void DeletePage(int Page)
@@ -193,20 +223,20 @@ namespace SecondDesktopDesktopManagerDll
                 PageList.Add(item.Key, item.Value);
             }
 
-            SaveSubApp();
+            PageList = PageList.OrderBy(o => o.Key).ToDictionary(o => o.Key, p => p.Value);
+
+            Save();
         }
 
         public void ModifyPage(int Page, string Title)
         {
             PageList[Page] = Title;
-            SaveSubApp();
+            Save();
         }
 
-        public void SaveSubApp()
+        public void Save()
         {
-			PageList = PageList.OrderBy(o => o.Key).ToDictionary(o => o.Key, p => p.Value);
-
-			DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopDataManager));
+            DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(DesktopDataManager));
             MemoryStream memoryStream = new MemoryStream();
             js.WriteObject(memoryStream, DesktopDataManager.GetInstance());
             memoryStream.Position = 0;

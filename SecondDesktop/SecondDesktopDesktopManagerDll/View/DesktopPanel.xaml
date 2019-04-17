@@ -33,7 +33,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
-        <materialDesign:Card Grid.Row="0" materialDesign:ShadowAssist.ShadowDepth="Depth1"  materialDesign:ShadowAssist.ShadowEdges="Bottom" Padding="0,0,0,4" Width="348" Margin="-1,-4,-1, 0">
+        <materialDesign:Card Grid.Row="0" materialDesign:ShadowAssist.ShadowDepth="Depth2"  materialDesign:ShadowAssist.ShadowEdges="Bottom" Padding="0,0,0,4" Width="348" Margin="-1,-4,-1, 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5"/>
