@@ -93,6 +93,8 @@ namespace SecondDesktopDesktopManagerDll
 
         private static void Init()
         {
+            bool exists = true;
+
             ConfigPath = ConfigManager.GetInstance().SystemConfigDirectory + "desktop.config";
             if (!File.Exists(ConfigPath))
             {
@@ -100,6 +102,8 @@ namespace SecondDesktopDesktopManagerDll
                 stream.Close();
 
                 File.WriteAllText(ConfigPath, MD5.Encrypt("[]"));
+
+                exists = false;
             }
 
             string json = File.ReadAllText(ConfigPath);
@@ -112,6 +116,12 @@ namespace SecondDesktopDesktopManagerDll
             if(desktopManager.PageList.Count() == 0)
             {
                 desktopManager.AddPage(0, "DESKTOP");
+            }
+
+            if(!exists)
+            {
+                desktopManager.SetThemeDark(true);
+                desktopManager.SetThemeColor(2);
             }
 		}
 

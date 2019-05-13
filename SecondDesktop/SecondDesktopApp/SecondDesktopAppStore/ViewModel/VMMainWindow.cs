@@ -91,7 +91,8 @@ namespace SecondDesktopAppStore
 								AppManager.GetInstance().AddApp(ConfigManager.GetInstance().ApplicationAppsDirectory + e);
 							} else
                             {
-                                AppManager.GetInstance().DeleteApp(e);
+                                if(e != "SecondDesktopAppStore")
+                                    AppManager.GetInstance().DeleteApp(e);
                             }
                             Init();
 						}), null);

@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="1" BorderThickness="2" CornerRadius="4" BorderBrush="{DynamicResource PrimaryHueMidBrush}">
             <WrapPanel Width="342" VerticalAlignment="Stretch" Orientation="Vertical">
-                <Grid Background="{DynamicResource PrimaryHueMidBrush}" Width="342" Height="16">
+                <Grid Background="{DynamicResource PrimaryHueMidBrush}" Width="342" Height="18">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3"/>
-                        <ColumnDefinition Width="18"/>
+                        <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="0"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
@@ -35,8 +35,8 @@
                         <ColumnDefinition Width="13"/>
                         <ColumnDefinition Width="3"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Source="{Binding AppImage, Mode=TwoWay}" Width="14" Height="14" Stretch="Fill"/>
-                    <TextBlock Grid.Column="3" Text="{Binding AppTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" Width="200" VerticalAlignment="Center" />
+                    <Image Grid.Column="1" Source="{Binding AppImage, Mode=TwoWay}" Width="18" Height="18" Margin="0"/>
+                    <TextBlock Grid.Column="3" Text="{Binding AppTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" Width="200" VerticalAlignment="Top" Margin="0"/>
                     <Button Grid.Column="5" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Visibility="{Binding SettingsButtonVisibility}"
                         Command="{Binding MoveLeftClickCommand}" CommandParameter="" Width="12" Height="12" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                         <materialDesign:PackIcon Kind="ArrowLeftBoldOutline" Width="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>

@@ -108,7 +108,8 @@ namespace SecondDesktopAppManagerDll
                     appDeleteCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            AppManager.GetInstance().DeleteApp(e);
+                            if(e != "SecondDesktopAppStore")
+                                AppManager.GetInstance().DeleteApp(e);
                         }), null);
                 return appDeleteCommand;
             }
