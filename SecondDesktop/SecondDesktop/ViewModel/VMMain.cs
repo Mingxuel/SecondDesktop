@@ -52,7 +52,8 @@ namespace SecondDesktop
 
 			DesktopWindowManager.GetInstance().ThemeDark = DesktopWindowManager.GetInstance().ThemeDark;
 			DesktopWindowManager.GetInstance().ThemeColor = DesktopWindowManager.GetInstance().ThemeColor;
-		}
+            IsThemeDark = DesktopWindowManager.GetInstance().ThemeDark;
+        }
 
         private int ShowWindow()
         {
@@ -231,6 +232,16 @@ namespace SecondDesktop
         #endregion
 
         #region About Desktop
+        public bool IsThemeDark
+        {
+            get { return Model.IsThemeDark; }
+            set
+            {
+                Model.IsThemeDark = value;
+                RaisePropertyChanged("IsThemeDark");
+            }
+        }
+
         private bool isAppWindowOpen;
         public bool IsAppWindowOpen
         {
@@ -252,39 +263,6 @@ namespace SecondDesktop
                 if (appWindowContent == value) return;
                 appWindowContent = value;
                 RaisePropertyChanged("AppWindowContent");
-            }
-        }
-
-        private SDCommand<string> appWindowAcceptCommand;
-        public SDCommand<string> AppWindowAcceptCommand
-        {
-            get
-            {
-                if (appWindowAcceptCommand == null)
-                    appWindowAcceptCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            AppWindowContent = new MessageBoxYesNo();
-                            Task.Delay(TimeSpan.FromSeconds(3))
-                                .ContinueWith((t, _) => IsAppWindowOpen = false, null,
-                                    TaskScheduler.FromCurrentSynchronizationContext());
-                        }), null);
-                return appWindowAcceptCommand;
-            }
-        }
-
-        private SDCommand<string> appWindowCancelCommand;
-        public SDCommand<string> AppWindowCancelCommand
-        {
-            get
-            {
-                if (appWindowCancelCommand == null)
-                    appWindowCancelCommand = new SDCommand<string>(
-                        new Action<string>(e =>
-                        {
-                            IsAppWindowOpen = false;
-                        }), null);
-                return appWindowCancelCommand;
             }
         }
 

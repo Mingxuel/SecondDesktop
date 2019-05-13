@@ -100,8 +100,8 @@
     <Compile Include="View\AppPanelFrame.xaml.cs">
       <DependentUpon>AppPanelFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MessageBoxYesNo.xaml.cs">
-      <DependentUpon>MessageBoxYesNo.xaml</DependentUpon>
+    <Compile Include="View\Progress.xaml.cs">
+      <DependentUpon>Progress.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,7 +119,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MessageBoxYesNo.xaml">
+    <Page Include="View\Progress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

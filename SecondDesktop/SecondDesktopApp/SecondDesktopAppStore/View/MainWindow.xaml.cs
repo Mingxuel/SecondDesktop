@@ -20,10 +20,17 @@ namespace SecondDesktopAppStore
 	/// </summary>
 	public partial class MainWindow : UserControl
 	{
+        private VMMainWindow ViewModel = null;
         public MainWindow(string pConfig)
         {
             InitializeComponent();
-            this.DataContext = new VMMainWindow();
+            ViewModel = new VMMainWindow();
+            this.DataContext = ViewModel;
         }
-	}
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Loaded();
+        }
+    }
 }

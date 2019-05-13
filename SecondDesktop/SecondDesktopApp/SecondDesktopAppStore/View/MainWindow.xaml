@@ -6,16 +6,21 @@
              xmlns:local="clr-namespace:SecondDesktopAppStore"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cmd="clr-namespace:SecondDesktopDll;assembly=SecondDesktopDll"
-             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+             mc:Ignorable="d" Loaded="WindowLoaded"
              d:DesignHeight="1080" d:DesignWidth="344"
-             Width="344" Background="#2D2D2D" Margin="0">
+             Width="344" Margin="0">
     <Grid>
-        <Grid Background="#3D3D3D">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0"/>
+                <RowDefinition Height="34"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5"/>
             </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" materialDesign:ShadowAssist.ShadowDepth="Depth2"  materialDesign:ShadowAssist.ShadowEdges="Bottom" Padding="0,0,0,4" Width="348" Height="30" Margin="0, 0, 0, 0">
+                <TextBlock Grid.Row="0" Text="APP STORE" Margin="0,6,0,0" FontSize="17" HorizontalAlignment="Center"/>
+            </materialDesign:Card>
             <ItemsControl x:Name="ICApp" Grid.Row="1" ItemsSource="{Binding AppItems, Mode=TwoWay}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -24,64 +29,28 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="48" Width="344" Margin="4,4,8,0" Background="#2D2D2D">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="48"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="64"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="1"  Source="{Binding Icon, Mode=TwoWay}" Stretch="Fill" Width="48" Height="48" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="3" Text="{Binding Title, Mode=TwoWay}" Margin="0,5,0,0" Foreground="White" FontSize="15" VerticalAlignment="Top"/>
-                            <Button Grid.Column="5" Background="#FF1C97EA" Foreground="White" Height="24" Width="64">
-                                <Button.Content>
-                                    <TextBlock Text="{Binding Status, Mode=TwoWay}"/>
-                                </Button.Content>
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}" >
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <EventTrigger RoutedEvent="Button.MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF0E6198" Duration="0:0:0.1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="Button.MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1C97EA" Duration="0:0:0.1" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cmd:SDEventCommand Command="{Binding Path=DataContext.ActiveCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
+                        <Grid Height="59">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Height="48" Width="344" Margin="4,4,4,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="96"/>
+                                    <ColumnDefinition Width="12"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="48" Height="48" VerticalAlignment="Center"/>
+                                <Image Grid.Column="1"  Source="{Binding Icon, Mode=TwoWay}" Stretch="Fill" Width="48" Height="48" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Title, Mode=TwoWay}" Margin="0,0,0,0" FontSize="22" VerticalAlignment="Center" Typography.Capitals="AllSmallCaps"/>
+                                <Button Grid.Column="5" Content="{Binding Status, Mode=TwoWay}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="96" Height="24" VerticalAlignment="Center"
+                                    Command="{Binding Path=DataContext.ActiveCommand, ElementName=ICApp}" CommandParameter="{Binding AppUID, Mode=TwoWay}"/>
+                            </Grid>
+                            <Border Grid.Row="1" Margin="12 0 12 0" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

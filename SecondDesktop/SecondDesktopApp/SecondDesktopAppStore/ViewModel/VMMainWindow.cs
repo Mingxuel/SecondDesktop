@@ -9,55 +9,61 @@ using System.Windows.Media.Imaging;
 using SecondDesktopDll;
 using SecondDesktopAppManagerDll;
 using System.Runtime.Serialization;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace SecondDesktopAppStore
 {
-	[DataContract]
 	class VMMainWindow : NotifyObject
     {
         public MMainWindow Model { get; set; }
         public VMMainWindow()
         {
 			Model = new MMainWindow();
-
             Init();
         }
 
-        private void Init()
+        public void Loaded() {
+            //Init();
+        }
+
+        public void Init()
         {
             AppItems.Clear();
-
             string[] appsPath = Directory.GetDirectories(ConfigManager.GetInstance().ApplicationAppsDirectory);
 
-            foreach(string path in appsPath)
+            foreach (string path in appsPath)
             {
                 bool exist = false;
                 AppStoreItem appStoreItem = new AppStoreItem();
                 AppItem appItem = AppManager.GetInstance().LoadApp(path);
-                foreach(var item in AppManager.GetInstance().AppItemList)
+                foreach (var item in AppManager.GetInstance().AppItemList)
                 {
-                    if(item.AppUID == appItem.AppUID)
+                    if (item.AppUID == appItem.AppUID)
                     {
                         exist = true;
                         break;
                     }
                 }
 
-				appStoreItem.AppUID = appItem.AppUID;
-				appStoreItem.Icon = appItem.Icon;
+                appStoreItem.AppUID = appItem.AppUID;
+                appStoreItem.Icon = appItem.Icon;
                 appStoreItem.Title = appItem.Name;
                 if (exist)
                 {
                     appStoreItem.Status = "UnInstall";
-                } else
+                }
+                else
                 {
                     appStoreItem.Status = "Install";
                 }
-                AppItems.Add(appStoreItem);
+                Application.Current.Dispatcher.BeginInvoke((Action)delegate {
+                    AppItems.Add(appStoreItem);
+                });
             }
         }
 
-		[DataMember]
 		public ObservableCollection<AppStoreItem> AppItems
         {
             get

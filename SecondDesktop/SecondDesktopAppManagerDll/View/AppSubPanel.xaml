@@ -71,7 +71,7 @@
                             </Button>
                             <materialDesign:PackIcon Grid.Row="0" Grid.Column="1" Kind="WindowClose" Width="10" Height="10" VerticalAlignment="Top" HorizontalAlignment="Right"
                                 Visibility="{Binding DataContext.DeleteVisibility, ElementName=ICApp, Mode=TwoWay}" Margin="0,-4,-4,0" Foreground="White"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" FontSize="10" Margin="0" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Name}" FontSize="10" Margin="0" HorizontalAlignment="Center" TextWrapping="Wrap" Typography.Capitals="AllSmallCaps"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

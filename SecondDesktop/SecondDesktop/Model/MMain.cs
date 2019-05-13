@@ -33,5 +33,7 @@ namespace SecondDesktop
 		public Visibility ThemeVisibility;
 		public Visibility AppsVisibility;
 		public double BottomDrawerHeight;
-	}
+
+        public bool IsThemeDark;
+    }
 }

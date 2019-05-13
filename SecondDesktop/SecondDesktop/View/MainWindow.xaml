@@ -116,7 +116,7 @@
                                         <ColumnDefinition Width="5"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right">Light</TextBlock>
-                                    <ToggleButton Grid.Column="3" Margin="0" Command="{Binding ThemeLightDarkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
+                                    <ToggleButton Grid.Column="3" Margin="0" IsChecked="{Binding IsThemeDark, Mode=TwoWay}" Command="{Binding ThemeLightDarkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
                                     <TextBlock Grid.Column="5" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">Dark</TextBlock>
                                 </Grid>
                                 <ItemsControl Grid.Row="2" ItemsSource="{Binding Swatches, Mode=OneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
@@ -300,7 +300,7 @@
             </Grid>
         </materialDesign:DrawerHost>
         <materialDesign:DialogHost Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 0" Padding="0"
-            IsOpen="{Binding IsAppWindowOpen}" DialogContent="{Binding AppWindowContent}" CloseOnClickAway="True" DialogMargin="0">
+            IsOpen="{Binding IsAppWindowOpen}" DialogContent="{Binding AppWindowContent}" CloseOnClickAway="True" DialogMargin="0" DialogTheme="Inherit">
             <Border BorderThickness="0" Width="348" Height="{Binding MainWindowHeight, Mode=TwoWay}" ClipToBounds="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </materialDesign:DialogHost>
     </Grid>

@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,6 +77,7 @@ namespace SecondDesktopAppManagerDll
             }
         }
 
+        private string selectAppUID = "";
 		private SDCommand<string> appClickCommand;
         public SDCommand<string> AppClickCommand
         {
@@ -84,10 +87,16 @@ namespace SecondDesktopAppManagerDll
                     appClickCommand = new SDCommand<string>(
                         new Action<string>(e =>
                         {
-                            AppManager.GetInstance().SelectApp(e);
+                            selectAppUID = e;
+                            SelectApp();
                         }), null);
                 return appClickCommand;
             }
+        }
+
+        private void SelectApp()
+        {
+            AppManager.GetInstance().SelectApp(selectAppUID);
         }
 
         private SDCommand<string> appDeleteCommand;
