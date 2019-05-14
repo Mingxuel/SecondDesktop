@@ -27,14 +27,7 @@ namespace AppDemo
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-			HotkeyManager.GetInstance().RegisterHotKey("Test", LKey.Ctrl, RKey.D0, HotKey);
-        }
-
-        private int HotKey()
-        {
-            MessageBox.Show("Yes");
-
-            return 0;
+			
         }
     }
 }

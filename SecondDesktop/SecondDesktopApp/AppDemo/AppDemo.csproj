@@ -56,9 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUID.cs" />
-    <Compile Include="Default\NotifyObject.cs" />
+    <Compile Include="NotifyObject.cs" />
     <Compile Include="SubAppConfigManager.cs" />
-    <Compile Include="Default\Factory.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubAppData.cs" />
     <Compile Include="AppWindow.xaml.cs">
