@@ -34,38 +34,24 @@
 ### 2.1 Definitions
     SD -- Second Desktop  
     SDA -- Second Desktop App  
-
-### 2.2 How to create your first SDA?
-    1> Download code then extract files.  
-    2> Double click SecondDesktop.sln.  
-    3> File->New->Project->Class Library(.Net Framework), don`t forget rename your project.  
-    4> Ready your project image, size is 36x36, type is png, name is your App name, then add the  
-       image to the project root directory.  
-    5> Right mouse click on the project->Properties->Build Events->Post-build event command line,  
-       add command in the textbox like below:  
-        xcopy /Y "$(ProjectDir)*.png" "$(TargetDir)"  
-        xcopy /Y "$(TargetDir)*" "$(APPDATA)\$(SolutionName)\Apps\$(TargetName)\"  
-    6> Right mouse click on the project->Add->New Item->User Control(WPF), rename to 'MainWindow'.  
-    7> Right mouse click on the project->Add->New Item->User Control(WPF), rename to you want(this  
-       is your SubApp Window).  
-    8> Add SecondDesktop/SecondDesktop/AppDemo/Factory.cs to the project.  
-    9> Open Factory.cs, and modify something like below(I believe you are smart enough):  
-        >> enum AppUID  
-        >> Factory::AppName  
-        >> Factory::CreateWindow  
-    10> Create a button from MainWindow and add click event, you can create SubApp config file,  
-        create SubApp, the parameter is config file.  
-        e.g like below:  
-```csharp
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string config = Factory.CreateSubAppConfig();
-            SubAppConfigManager manager = new SubAppConfigManager(config);
-            manager.SetText(Message.Text);
-            Factory.CreateSubApp(AppUID.SubApp, config);
-        }
-```
-    *Can refer to SecondDesktop/SecondDesktop/AppDemo.  
-
-### 2.3 Roadmap
-
+### 2.2 How To Create Your First SDA?  
+    1> Open SecondDesktop.sln.  
+    2> Set 'AppCreator' Project as Startup Project->Run.  
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/Creator.png"/>    
+    3> Input your SDA name , then click 'CREATE' button.  
+        If success you can see your project in the path ./SecondDesktop/SecondDesktopApp/.  
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SetAsStartupProject.png"/>
+    3> 'Apps' folder->Add->Existing Project-> Select your *.csproj.  
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AddSubAppProject.png"/>
+### 2.3 Create SubApp UserControl  
+    1> Create UserControl.  
+    2> Open AppUID.cs, then insert your UserControl name into enum AppUID.  
+### 2.4 Create Config File  
+    ```csharp
+        Factory.CreateSubApp(AppUID.SubApp, config);
+    ```
+### 2.5 Insert SubApp into Desktop
+    ```csharp
+        string config = Factory.CreateSubAppConfig();
+        Factory.CreateSubApp(AppUID.SubApp, config);
+    ```
