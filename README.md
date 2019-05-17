@@ -50,12 +50,12 @@
     1> Create UserControl.  
     2> Open AppUID.cs, then insert your UserControl name into enum AppUID.  
 ### 2.4 Create Config File
-    ```csharp
-        Factory.CreateSubApp(AppUID.SubApp, config);
-    ```
+```csharp
+    Factory.CreateSubApp(AppUID.SubApp, config);
+```
 ### 2.5 Insert SubApp into Desktop
-    ```csharp
-        string config = Factory.CreateSubAppConfig();
-        Factory.CreateSubApp(AppUID.SubApp, config);
-    ```
+```csharp
+    string config = Factory.CreateSubAppConfig();
+    Factory.CreateSubApp(AppUID.SubApp, config);
+```
 
