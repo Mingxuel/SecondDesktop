@@ -38,11 +38,14 @@
     1> Open SecondDesktop.sln.  
     2> Set 'AppCreator' Project as Startup Project->Run.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SetAsStartupProject.png"/>
+
     3> Input your SDA name , then click 'CREATE' button.  
         If success you can see your project in the path ./SecondDesktop/SecondDesktopApp/.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/Creator.png"/>
+
     3> 'Apps' folder->Add->Existing Project-> Select your *.csproj.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/AddSubAppProject.png"/>
+
 ### 2.3 Create SubApp UserControl
     1> Create UserControl.  
     2> Open AppUID.cs, then insert your UserControl name into enum AppUID.  
