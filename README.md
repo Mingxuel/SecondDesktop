@@ -37,7 +37,7 @@
 ### 2.2 How To Create Your First SDA?  
     1> Open SecondDesktop.sln.  
     2> Set 'AppCreator' Project as Startup Project->Run.  
-<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/Creator.png"/>    
+<img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/Creator.png"/>
     3> Input your SDA name , then click 'CREATE' button.  
         If success you can see your project in the path ./SecondDesktop/SecondDesktopApp/.  
 <img src="https://raw.githubusercontent.com/Mingxuel/SecondDesktop/master/BlogResource/SetAsStartupProject.png"/>
